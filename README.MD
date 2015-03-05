@@ -1,0 +1,1 @@
+Phoca Open Graph Plugin is Joomla! CMS extension. Plugin which adds open graph information into website.
