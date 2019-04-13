@@ -2,9 +2,9 @@
 
 
 
-![Phoca Opent Graph Content Plugin](https://github.com/PhocaCz/PhocaOpenGraphPlugin/blob/master/phocaopengraph.png)
+![Phoca Open Graph Content Plugin](https://github.com/PhocaCz/PhocaOpenGraphPlugin/blob/master/phocaopengraph.png)
 
-# Phoca Opent Graph Content Plugin
+# Phoca Open Graph Content Plugin
 
 
 
@@ -14,7 +14,7 @@ Phoca Open Graph Content Plugin is a Joomla! CMS Plugin. It adds open graph info
 
 ## Project page
 
-[Phoca Opent Graph Content Plugin](https://www.phoca.cz/phoca-open-graph-plugin)
+[Phoca Open Graph Content Plugin](https://www.phoca.cz/phoca-open-graph-plugin)
 
 
 
