@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension group="content" method="upgrade" type="plugin" version="3">
-	<name>plg_content_phoca_open_graph</name>
-	<creationDate>25/10/2017</creationDate>
+<extension type="plugin" group="content" method="upgrade" version="3">
+	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
+	<creationDate>13/04/2019</creationDate>
 	<authorEmail></authorEmail>
-	<authorUrl>www.phoca.cz</authorUrl>
+	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>3.1.1</version>
-	
-	<description>PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION</description>
-	
+	<version>3.1.3</version>
+	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
+	<projectName>PhocaOpenGraphPlugin</projectName>
+
 	<files>
 		<folder>models</folder>
+		<filename plugin="phocaopengraph">index.html</filename>
 		<filename plugin="phocaopengraph">phocaopengraph.php</filename>
-		<filename >index.html</filename>
 	</files>
-	
+
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_content_phocaopengraph.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.plg_content_phocaopengraph.sys.ini</language>
 	</languages>
-	
+
 	<administration>
 		<languages>
 			<language tag="en-GB">language/en-GB/en-GB.plg_content_phocaopengraph.ini</language>
@@ -29,14 +29,14 @@
 		</languages>
 	</administration>
 	
-<config>
+	<config>
 		<fields name="params" addfieldpath="/plugins/content/phocaopengraph/models/fields">
 			<fieldset name="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_OPTIONS">	
 		
 		
 			<field name="phocahead1" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>	
 			
-			<field name="title" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC" />
+			<field name="title" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
 			
 			<field name="type" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
 						<option value="activity">activity</option>
@@ -79,15 +79,15 @@
 						<option value="article">article</option>
 					</field>
 			
-			<field name="image" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC" />
+			<field name="image" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
 			
-			<field name="url" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC" />
+			<field name="url" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
 			
 			<field name="phocahead2" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>	
 			
-			<field name="site_name" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC" />
+			<field name="site_name" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
 			
-			<field name="description" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC" />
+			<field name="description" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
 				
 		
 			</fieldset>
@@ -97,7 +97,7 @@
 			
 			<field name="phocahead1f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>	
 			
-			<field name="titlef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC" />
+			<field name="titlef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
 			
 			<field name="typef" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
 						<option value="activity">activity</option>
@@ -140,15 +140,15 @@
 						<option value="article">article</option>
 					</field>
 			
-			<field name="imagef" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC" />
+			<field name="imagef" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
 			
-			<field name="urlf" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC" />
+			<field name="urlf" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
 			
 			<field name="phocahead2f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>	
 			
-			<field name="site_namef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC" />
+			<field name="site_namef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
 			
-			<field name="descriptionf" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC" />
+			<field name="descriptionf" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
 			
 			<field name="displayf" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_FEATURED_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_FEATURED_DESC">
 				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
@@ -163,7 +163,7 @@
 			
 			<field name="phocahead1f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>	
 			
-			<field name="titlec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC" />
+			<field name="titlec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
 			
 			<field name="typec" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
 						<option value="activity">activity</option>
@@ -206,15 +206,15 @@
 						<option value="article">article</option>
 					</field>
 			
-			<field name="imagec" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC" />
+			<field name="imagec" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
 			
-			<field name="urlc" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC" />
+			<field name="urlc" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
 			
 			<field name="phocahead2f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>	
 			
-			<field name="site_namec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC" />
+			<field name="site_namec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
 			
-			<field name="descriptionc" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC" />
+			<field name="descriptionc" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
 			
 			<field name="displayc" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_DESC">
 				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
@@ -226,9 +226,9 @@
 			</fieldset>
 			
 			<fieldset name="common" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_COMMON_OPTIONS">
-			<field name="app_id" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_DESC" />
+			<field name="app_id" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_DESC"/>
 			
-			<field name="other" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_DESC" />
+			<field name="other" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_DESC"/>
 			
 			<field name="render_type" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_DESC">
 				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_NAME</option>
@@ -240,17 +240,22 @@
 				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
 			</field>
 			
-			<field name="remove_strings_description" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_DESC" />
+			<field name="remove_strings_description" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_DESC"/>
 			
-			<field name="disable_menu_items" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_DESC" />
+			<field name="disable_menu_items" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_DESC"/>
 			
-			<field name="disable_views" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_DESC" />
+			<field name="disable_views" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_DESC"/>
 			
-			<field name="disable_options" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_DESC" />
+			<field name="disable_options" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_DESC"/>
 			
 			<field name="parameter_image" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_PARAMETER_IMAGE_ORDERING_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_PARAMETER_IMAGE_ORDERING_DESC">
 				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_FIRST</option>
 				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_LAST</option>
+			</field>
+			
+			<field name="change_svg_to_png" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHANGE_SVG_TO_PNG_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHANGE_SVG_TO_PNG_DESC">
+				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
+				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
 			</field>
 			
 			
@@ -269,13 +274,14 @@
 				<option value="summary">summary</option>
 			</field>
 			
-			<field name="twitter_site" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_DESC" />
-			<field name="twitter_creator" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_DESC" />
+			<field name="twitter_site" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_DESC"/>
+			<field name="twitter_creator" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_DESC"/>
 			
 			</fieldset>
 		</fields>
 	</config>
+
 	<updateservers>
-		<server type="extension" priority="1" name="updates"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaOpenGraphPlugin/master/manifest.xml]]></server>
+		<server type="extension" name="PLG_CONTENT_PHOCAOPENGRAPH" priority="1"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaOpenGraphPlugin/master/manifest.xml]]></server>
 	</updateservers>
 </extension>
