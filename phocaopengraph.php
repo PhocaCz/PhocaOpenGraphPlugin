@@ -170,6 +170,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$config 	= JFactory::getConfig();
 		$type		= $this->params->get('render_type', 1);
 		$desc_intro	= $this->params->get('desc_intro', 0);
+		$title_type	= $this->params->get('title_type', 1);
 		
 		// We need help variables as we cannot change the $row variable - such then will influence global settings
 		$thisDesc 	= '';
@@ -177,15 +178,43 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$thisKey	= '';
 		$thisImg	= '';
 		
+		// Attributes
+		$attribs = '';
+		if (isset($row->attribs)) {
+			$attribs = json_decode($row->attribs);
+		}
+		
 		if (isset($row->metadesc)) {
 			$thisDesc 	= $row->metadesc;
 		}
-		if (isset($row->title)) {
-			$thisTitle	= $row->title;
+		
+		
+		if ($title_type == 2) {
+			if (isset($attribs->article_page_title) && $attribs->article_page_title != '') {
+				$thisTitle	= $attribs->article_page_title;
+			} else {
+				// Fallback to standard title
+				if (isset($row->title)) {
+					$thisTitle	= $row->title;
+				}
+			}
+			
+		} else {
+			if (isset($row->title)) {
+				$thisTitle	= $row->title;
+			}
 		}
+		
+		
+		
+		
+		
+		
 		if (isset($row->metakey)) {
 			$thisKey	= $row->metakey;
 		}
+		
+		
 
 		
 		if ($view == 'featured' && $this->pluginNr == 0) {
@@ -229,6 +258,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		}
 		
 		// Title
+		
 		if ($this->params->get('title'.$suffix, '') != '') {
 			$this->renderTag('og:title', $this->params->get('title'.$suffix, ''), $type);
 		} else if (isset($row->title) && $row->title != '') {
@@ -243,6 +273,8 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if (isset($row->images)) {
 			$pictures = json_decode($row->images);
 		}
+		
+		
 
 		$imgSet = 0;
 		
