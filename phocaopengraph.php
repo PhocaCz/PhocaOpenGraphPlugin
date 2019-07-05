@@ -172,6 +172,9 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$desc_intro	= $this->params->get('desc_intro', 0);
 		$title_type	= $this->params->get('title_type', 1);
 		
+		
+		
+		
 		// We need help variables as we cannot change the $row variable - such then will influence global settings
 		$thisDesc 	= '';
 		$thisTitle	= '';
@@ -181,15 +184,25 @@ class plgContentPhocaOpenGraph extends JPlugin
 		// Attributes
 		$attribs = '';
 		if (isset($row->attribs)) {
-			$attribs = json_decode($row->attribs);
+			//$attribs = json_decode($row->attribs);
+			$attribs = (is_string($row->attribs) ? json_decode($row->attribs) : $row->attribs); 
 		}
 		
 		if (isset($row->metadesc)) {
 			$thisDesc 	= $row->metadesc;
 		}
 		
-		
-		if ($title_type == 2) {
+		if ($title_type == 3) {
+			if (isset($document->title) && $document->title != '') {
+				$thisTitle	= $document->title;
+			} else {
+				// Fallback to standard title
+				if (isset($row->title)) {
+					$thisTitle	= $row->title;
+				}
+			}
+			
+		} else if ($title_type == 2) {
 			if (isset($attribs->article_page_title) && $attribs->article_page_title != '') {
 				$thisTitle	= $attribs->article_page_title;
 			} else {
@@ -271,7 +284,8 @@ class plgContentPhocaOpenGraph extends JPlugin
 		// Image
 		$pictures = '';
 		if (isset($row->images)) {
-			$pictures = json_decode($row->images);
+			//$pictures = json_decode($row->images);
+			$pictures = (is_string($row->images) ? json_decode($row->images) : $row->images); 
 		}
 		
 		

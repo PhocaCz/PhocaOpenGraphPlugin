@@ -2,12 +2,12 @@
 <extension type="plugin" group="content" method="upgrade" version="3">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>04/06/2019</creationDate>
+	<creationDate>05/07/2019</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>3.1.4</version>
+	<version>3.1.5</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
@@ -41,6 +41,7 @@
 			<field name="title_type" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_DESC">
 				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_TITLE</option>
 				<option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_PAGE_TITLE</option>
+				<option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_TITLE</option>
 			</field>
 			
 			<field name="type" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
