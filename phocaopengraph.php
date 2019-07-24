@@ -75,21 +75,21 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$value                  = strip_tags(html_entity_decode($value));
 		// OG
 		if ($type == 1) {
-			$document->setMetadata(htmlspecialchars($name, COMPAT, 'UTF-8'), htmlspecialchars($value, COMPAT, 'UTF-8'));
+			$document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
 		} else {
-			$document->addCustomTag('<meta property="'.htmlspecialchars($name, COMPAT, 'UTF-8').'" content="' . htmlspecialchars($value, COMPAT, 'UTF-8') . '" />');
+			$document->addCustomTag('<meta property="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'" content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
 		}
 
 		// Tweet with cards
 		if ($this->twitterEnable == 1) {
 			if ($name == 'og:title') {
-				$document->setMetadata('twitter:title', htmlspecialchars($value, COMPAT , 'UTF-8'));
+				$document->setMetadata('twitter:title', htmlspecialchars($value, ENT_COMPAT , 'UTF-8'));
 			}
 			if ($name == 'og:description') {
-				$document->setMetadata('twitter:description', htmlspecialchars($value, COMPAT, 'UTF-8'));
+				$document->setMetadata('twitter:description', htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
 			}
 			if ($name == 'og:image') {
-				$document->setMetadata('twitter:image', htmlspecialchars($value, COMPAT, 'UTF-8'));
+				$document->setMetadata('twitter:image', htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
 			}
 		}
 	}
