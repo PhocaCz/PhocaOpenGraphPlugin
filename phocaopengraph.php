@@ -70,24 +70,26 @@ class plgContentPhocaOpenGraph extends JPlugin
 	public function renderTag($name, $value, $type = 1) {
 		
 		$document 				= JFactory::getDocument();
-		
+
+		// Encoded html tags can still be rendered, decode and strip tags first.
+		$value                  = strip_tags(html_entity_decode($value));
 		// OG
 		if ($type == 1) {
-			$document->setMetadata(htmlspecialchars($name), htmlspecialchars($value));
+			$document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
 		} else {
-			$document->addCustomTag('<meta property="'.htmlspecialchars($name).'" content="' . htmlspecialchars($value) . '" />');
+			$document->addCustomTag('<meta property="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'" content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
 		}
-		
+
 		// Tweet with cards
 		if ($this->twitterEnable == 1) {
 			if ($name == 'og:title') {
-				$document->setMetadata('twitter:title', htmlspecialchars($value));
+				$document->setMetadata('twitter:title', htmlspecialchars($value, ENT_COMPAT , 'UTF-8'));
 			}
 			if ($name == 'og:description') {
-				$document->setMetadata('twitter:description', htmlspecialchars($value));
+				$document->setMetadata('twitter:description', htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
 			}
 			if ($name == 'og:image') {
-				$document->setMetadata('twitter:image', htmlspecialchars($value));
+				$document->setMetadata('twitter:image', htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
 			}
 		}
 	}
@@ -122,7 +124,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		
 		
 		if ($this->twitterEnable == 1) {
-			$this->renderTag('twitter:card', htmlspecialchars($twitterCard), 1);
+			$this->renderTag('twitter:card', htmlspecialchars($twitterCard, ENT_COMPAT, 'UTF-8'), 1);
 			
 			if ($this->params->get('twitter_site', '') != '') {
 				$this->renderTag('twitter:site', $this->params->get('twitter_site', ''), 1);
