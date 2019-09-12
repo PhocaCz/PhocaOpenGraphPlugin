@@ -15,17 +15,17 @@ class plgContentPhocaOpenGraph extends JPlugin
 {
 	public $pluginNr 		= 0;
 	public $twitterEnable 	= 0;
-	
+
 	public function __construct(& $subject, $config) {
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 	}
-	
+
 	public function setImage($image) {
-		
+
 		$change_svg_to_png 		= $this->params->get('change_svg_to_png', 0);
 		$linkImg 				= $image;
-		
+
 		$absU = 0;
 		// Test if this link is absolute http:// then do not change it
 		$pos1 			= strpos($image, 'http://');
@@ -33,7 +33,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		} else {
 			$absU = 1;
 		}
-		
+
 		// Test if this link is absolute https:// then do not change it
 		$pos2 			= strpos($image, 'https://');
 		if ($pos2 === false) {
@@ -41,21 +41,21 @@ class plgContentPhocaOpenGraph extends JPlugin
 			$absU = 1;
 		}
 
-		
+
 		if ($absU == 1) {
 			$linkImg = $image;
 		} else {
 			$linkImg = JURI::base(false).$image;
-			
+
 			if ($image[0] == '/') {
 				$myURI = new \Joomla\Uri\Uri(JURI::base(false));
 				$myURI->setPath($image);
 				$linkImg = $myURI->toString();
-				
+
 			} else {
 				$linkImg = JURI::base(false).$image;
 			}
-			
+
 			if ($change_svg_to_png == 1) {
 				$pathInfo 	= pathinfo($linkImg);
 				if (isset($pathInfo['extension']) && $pathInfo['extension'] == 'svg') {
@@ -63,16 +63,17 @@ class plgContentPhocaOpenGraph extends JPlugin
 				}
 			}
 		}
-		
+
 		return $linkImg;
 	}
-	
+
 	public function renderTag($name, $value, $type = 1) {
-		
+
 		$document 				= JFactory::getDocument();
 
 		// Encoded html tags can still be rendered, decode and strip tags first.
 		$value                  = strip_tags(html_entity_decode($value));
+
 		// OG
 		if ($type == 1) {
 			$document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
@@ -93,15 +94,15 @@ class plgContentPhocaOpenGraph extends JPlugin
 			}
 		}
 	}
-	
+
 	public function onContentAfterDisplay($context, &$row, &$params, $page=0) {
-		
+
 		$app 	= JFactory::getApplication();
 		$view	= $app->input->get('view');// article, category, featured
 		$option	= $app->input->get('option');// article, category, featured
 		$itemid	= $app->input->get('Itemid');
 
-		
+
 		/*if ($view == 'article' && $app->input->get('id') != $row->id) {
 			// Page displays article so we want to set metadata for main content article only
 			return;
@@ -110,10 +111,10 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if ($view == 'tag') { return; }
 		if ($view == 'featured' && $this->params->get('displayf', 1) == 0) { return; }
 		if ($view == 'category' && $this->params->get('displayc', 1) == 0) { return; }
-		
-		
-		if ((int)$this->pluginNr > 0) { return; } // Second instance in featured view or category view 
-	
+
+
+		if ((int)$this->pluginNr > 0) { return; } // Second instance in featured view or category view
+
 		$itemids 				= $this->params->get('disable_menu_items', '');
 		$options 				= $this->params->get('disable_options', '');
 		$views 					= $this->params->get('disable_views', '');
@@ -121,20 +122,20 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$parameterImage 		= $this->params->get('parameter_image', 1);
 		$this->twitterEnable 	= $this->params->get('twitter_enable', 0);
 		$twitterCard 			= $this->params->get('twitter_card', 'summary_large_image');
-		
-		
+
+
 		if ($this->twitterEnable == 1) {
-			$this->renderTag('twitter:card', htmlspecialchars($twitterCard, ENT_COMPAT, 'UTF-8'), 1);
-			
+			$this->renderTag('twitter:card', $twitterCard, 1);
+
 			if ($this->params->get('twitter_site', '') != '') {
 				$this->renderTag('twitter:site', $this->params->get('twitter_site', ''), 1);
 			}
-			
+
 			if ($this->params->get('twitter_site', '') != '') {
 				$this->renderTag('twitter:creator', $this->params->get('twitter_creator', ''), 1);
-			}	
+			}
 		}
-		
+
 		if ($itemids != '') {
 			$itemidsA =  explode(',', $itemids);
 			if (!empty($itemidsA)) {
@@ -145,7 +146,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 				}
 			}
 		}
-		
+
 		if ($options != '') {
 			$optionsA =  explode(',', $options);
 			if (!empty($optionsA)) {
@@ -156,7 +157,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 				}
 			}
 		}
-		
+
 		if ($views != '') {
 			$viewsA =  explode(',', $views);
 			if (!empty($viewsA)) {
@@ -167,33 +168,33 @@ class plgContentPhocaOpenGraph extends JPlugin
 				}
 			}
 		}
-		
+
 		$document 	= JFactory::getDocument();
 		$config 	= JFactory::getConfig();
 		$type		= $this->params->get('render_type', 1);
 		$desc_intro	= $this->params->get('desc_intro', 0);
 		$title_type	= $this->params->get('title_type', 1);
-		
-		
-		
-		
+
+
+
+
 		// We need help variables as we cannot change the $row variable - such then will influence global settings
 		$thisDesc 	= '';
 		$thisTitle	= '';
 		$thisKey	= '';
 		$thisImg	= '';
-		
+
 		// Attributes
 		$attribs = '';
 		if (isset($row->attribs)) {
 			//$attribs = json_decode($row->attribs);
-			$attribs = (is_string($row->attribs) ? json_decode($row->attribs) : $row->attribs); 
+			$attribs = (is_string($row->attribs) ? json_decode($row->attribs) : $row->attribs);
 		}
-		
+
 		if (isset($row->metadesc)) {
 			$thisDesc 	= $row->metadesc;
 		}
-		
+
 		if ($title_type == 3) {
 			if (isset($document->title) && $document->title != '') {
 				$thisTitle	= $document->title;
@@ -203,7 +204,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisTitle	= $row->title;
 				}
 			}
-			
+
 		} else if ($title_type == 2) {
 			if (isset($attribs->article_page_title) && $attribs->article_page_title != '') {
 				$thisTitle	= $attribs->article_page_title;
@@ -213,25 +214,25 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisTitle	= $row->title;
 				}
 			}
-			
+
 		} else {
 			if (isset($row->title)) {
 				$thisTitle	= $row->title;
 			}
 		}
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		if (isset($row->metakey)) {
 			$thisKey	= $row->metakey;
 		}
-		
-		
 
-		
+
+
+
 		if ($view == 'featured' && $this->pluginNr == 0) {
 			$suffix 		= 'f';// Data from first article will be set
 			$this->pluginNr = 1;
@@ -243,7 +244,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			    .' WHERE c.id = '.(int) $row->catid . ' LIMIT 1';
 				$db->setQuery($query);
 				$cItem = $db->loadObjectList();
-				
+
 				if (!empty($cItem[0]->params)) {
 					$registry = new JRegistry;
 					$registry->loadString($cItem[0]->params);
@@ -251,9 +252,9 @@ class plgContentPhocaOpenGraph extends JPlugin
 					if (isset($pC['image']) && $pC['image'] != '') {
 						$thisImg =  $pC['image'];
 					}
-					
+
 				}
-				
+
 				if (isset($cItem[0]->metadesc) && $cItem[0]->metadesc != '') {
 					//$row->metadesc 	= $cItem[0]->metadesc; We cannot influence global variable
 					$thisDesc		= $cItem[0]->metadesc;
@@ -271,29 +272,29 @@ class plgContentPhocaOpenGraph extends JPlugin
 		} else {
 			$suffix 		= '';
 		}
-		
+
 		// Title
-		
+
 		if ($this->params->get('title'.$suffix, '') != '') {
 			$this->renderTag('og:title', $this->params->get('title'.$suffix, ''), $type);
 		} else if (isset($row->title) && $row->title != '') {
 			$this->renderTag('og:title', $thisTitle, $type);
 		}
-		
+
 		// Type
 		$this->renderTag('og:type', $this->params->get('type'.$suffix, 'article'), $type);
-		
+
 		// Image
 		$pictures = '';
 		if (isset($row->images)) {
 			//$pictures = json_decode($row->images);
-			$pictures = (is_string($row->images) ? json_decode($row->images) : $row->images); 
+			$pictures = (is_string($row->images) ? json_decode($row->images) : $row->images);
 		}
-		
-		
+
+
 
 		$imgSet = 0;
-		
+
 		if ($this->params->get('image'.$suffix, '') != '' && $parameterImage == 1) {
 			$this->renderTag('og:image', $this->setImage($this->params->get('image'.$suffix, '')), $type);
 			$imgSet = 1;
@@ -308,7 +309,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			$imgSet = 1;
 		} else {
 			// Try to find image in article
-			
+
 			$fulltext = '';
 			if (isset($row->fulltext) && $row->fulltext != '') {
 				$fulltext = $row->fulltext;
@@ -324,11 +325,11 @@ class plgContentPhocaOpenGraph extends JPlugin
 				//$this->renderTag('og:image', JURI::base(false).$src[1], $type);
 				$imgSet = 1;
 			}
-			
+
 			// Try to find image in images/phocaopengraph folder
 			if ($imgSet == 0) {
 				if (isset($row->id) && (int)$row->id > 0) {
-					
+
 					jimport( 'joomla.filesystem.file' );
 					$imgPath	= '';
 					$path 		= JPATH_ROOT . '/images/phocaopengraph/';
@@ -339,7 +340,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 					} else if (JFile::exists($path . '/' . (int)$row->id.'.gif')) {
 						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.gif';
 					}
-					
+
 					if ($imgPath != '') {
 						$this->renderTag('og:image', $this->setImage($imgPath), $type);
 						$imgSet = 1;
@@ -352,29 +353,29 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if ($imgSet == 0 && $this->params->get('image'.$suffix, '') != '' && $parameterImage == 0) {
 			$this->renderTag('og:image', $this->setImage($this->params->get('image'.$suffix, '')), $type);
 		}
-		
+
 		// END IMAGE
-		
+
 		//URL
 		if ($this->params->get('url'.$suffix, '') != '') {
 			$this->renderTag('og:url', $this->params->get('url'.$suffix, ''), $type);
-		} else {	
+		} else {
 			//} else if ((int)$row->id > 0) {
 			//$url = ContentHelperRoute::getArticleRoute($row->id);
 			//$document->setMetadata('og:url', JRoute::_($url));
 			$uri 	= JFactory::getURI();
 			$this->renderTag('og:url', $uri->toString(), $type);
 		}
-		
-		
+
+
 		// Site Name
 		if ($this->params->get('site_name'.$suffix, '') != '') {
 			$this->renderTag('og:site_name', $this->params->get('site_name'.$suffix, ''), $type);
 		} else if ($thisTitle != '') {
 			$this->renderTag('og:site_name', $config->get('sitename'), $type);
 		}
-		
-		
+
+
 		// Description
 
 		if ($this->params->get('description'.$suffix, '') != '') { // description in params
@@ -384,7 +385,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		} else if ($this->params->get('menu-meta_description') != '') { // menu link meta description
 			$this->renderTag('og:description', $this->params->get('menu-meta_description'), $type);
 		} else if (isset($row->introtext) && $row->introtext != '' && $desc_intro == 1) { // artcle introtext
-			
+
 			$iTD = $row->introtext;
 			$iTD = preg_replace('#(<code.*?>).*?(</code>)#', '$1$2', $iTD);
 			$iTD = preg_replace('#(<pre.*?>).*?(</pre>)#', '$1$2', $iTD);
@@ -393,12 +394,12 @@ class plgContentPhocaOpenGraph extends JPlugin
 			$iTD = str_replace("\r\n", ' ', $iTD);
 			$iTD = str_replace("\n", ' ', $iTD);
 			$iTD = str_replace("\n", ' ', $iTD);
-			
+
 			// Remove every possible plugin code
 			$iTD = preg_replace("/\{[^}]+\}/","",$iTD);
 			$iTD = preg_replace("/\[[^]]+\]/","",$iTD);
 			$iTD = preg_replace("/\([^)]+\)/","",$iTD);
-			
+
 			if ($rSD != '') {
 			$rSDA =  explode(',', $rSD);
 			if (!empty($rSDA)) {
@@ -407,17 +408,17 @@ class plgContentPhocaOpenGraph extends JPlugin
 				}
 			}
 		}
-			
+
 			$this->renderTag('og:description', $iTD, $type);
 		} else if ($config->get('MetaDesc') != '') { // site meta desc
 			$this->renderTag('og:description', $config->get('MetaDesc'), $type);
 		}
-		
+
 		// FB App ID - COMMON
 		if ($this->params->get('app_id', '') != '') {
 			$this->renderTag('fb:app_id', $this->params->get('app_id', ''), $type);
 		}
-		
+
 		// Other
 		if ($this->params->get('other', '') != '') {
 			$other = explode (';', $this->params->get('other', ''));
@@ -431,7 +432,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 							}
 						}
 					}
-				
+
 				}
 			}
 		}

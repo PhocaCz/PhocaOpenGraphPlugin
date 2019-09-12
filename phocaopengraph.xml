@@ -2,12 +2,12 @@
 <extension type="plugin" group="content" method="upgrade" version="3">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>24/07/2019</creationDate>
+	<creationDate>12/09/2019</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>3.1.7</version>
+	<version>3.1.8</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
