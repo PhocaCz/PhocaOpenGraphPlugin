@@ -2,12 +2,12 @@
 <extension type="plugin" group="content" method="upgrade" version="3">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>12/09/2019</creationDate>
+	<creationDate>11/10/2019</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>3.1.8</version>
+	<version>3.1.9</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
@@ -30,262 +30,270 @@
 	</administration>
 	
 	<config>
-		<fields name="params" addfieldpath="/plugins/content/phocaopengraph/models/fields">
-			<fieldset name="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_OPTIONS">	
-		
-		
-			<field name="phocahead1" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>	
-			
-			<field name="title" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
-			
-			<field name="title_type" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_TITLE</option>
-				<option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_PAGE_TITLE</option>
-				<option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_TITLE</option>
-			</field>
-			
-			<field name="type" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
-						<option value="activity">activity</option>
-						<option value="sport">sport</option>
-						<option value="bar">bar</option>
-						<option value="company">company</option>
-						<option value="cafe">cafe</option>
-						<option value="hotel">hotel</option>
-						<option value="restaurant">restaurant</option>
-						<option value="cause">cause</option>
-						<option value="sports_league">sports_league</option>
-						<option value="sports_team">sports_team</option>
-						<option value="band">band</option>
-						<option value="government">government</option>
-						<option value="non_profit">non_profit</option>
-						<option value="school">school</option>
-						<option value="university">university</option>
-						<option value="actor">actor</option>
-						<option value="athlete">athlete</option>
-						<option value="author">author</option>
-						<option value="director">director</option>
-						<option value="musician">musician</option>
-						<option value="politician">politician</option>
-						<option value="public_figure">public_figure</option>
-						<option value="city">city</option>
-						<option value="country">country</option>
-						<option value="landmark">landmark</option>
-						<option value="state_province">state_province</option>
-						<option value="album">album</option>
-						<option value="book">book</option>
-						<option value="drink">drink</option>
-						<option value="food">food</option>
-						<option value="game">game</option>
-						<option value="product">product</option>
-						<option value="song">song</option>
-						<option value="movie">movie</option>
-						<option value="tv_show">tv_show</option>
-						<option value="blog">blog</option>
-						<option value="website">website</option>
-						<option value="article">article</option>
-					</field>
-			
-			<field name="image" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
-			
-			<field name="url" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
-			
-			<field name="phocahead2" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>	
-			
-			<field name="site_name" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
-			
-			<field name="description" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
-				
-		
-			</fieldset>
-			
-			
-			<fieldset name="featured" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_FEATURED_OPTIONS">
-			
-			<field name="phocahead1f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>	
-			
-			<field name="titlef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
-			
-			<field name="typef" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
-						<option value="activity">activity</option>
-						<option value="sport">sport</option>
-						<option value="bar">bar</option>
-						<option value="company">company</option>
-						<option value="cafe">cafe</option>
-						<option value="hotel">hotel</option>
-						<option value="restaurant">restaurant</option>
-						<option value="cause">cause</option>
-						<option value="sports_league">sports_league</option>
-						<option value="sports_team">sports_team</option>
-						<option value="band">band</option>
-						<option value="government">government</option>
-						<option value="non_profit">non_profit</option>
-						<option value="school">school</option>
-						<option value="university">university</option>
-						<option value="actor">actor</option>
-						<option value="athlete">athlete</option>
-						<option value="author">author</option>
-						<option value="director">director</option>
-						<option value="musician">musician</option>
-						<option value="politician">politician</option>
-						<option value="public_figure">public_figure</option>
-						<option value="city">city</option>
-						<option value="country">country</option>
-						<option value="landmark">landmark</option>
-						<option value="state_province">state_province</option>
-						<option value="album">album</option>
-						<option value="book">book</option>
-						<option value="drink">drink</option>
-						<option value="food">food</option>
-						<option value="game">game</option>
-						<option value="product">product</option>
-						<option value="song">song</option>
-						<option value="movie">movie</option>
-						<option value="tv_show">tv_show</option>
-						<option value="blog">blog</option>
-						<option value="website">website</option>
-						<option value="article">article</option>
-					</field>
-			
-			<field name="imagef" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
-			
-			<field name="urlf" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
-			
-			<field name="phocahead2f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>	
-			
-			<field name="site_namef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
-			
-			<field name="descriptionf" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
-			
-			<field name="displayf" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_FEATURED_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_FEATURED_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
-				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
-			</field>
-			
+        <fields name="params" addfieldpath="/plugins/content/phocaopengraph/models/fields">
+            <fieldset name="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_OPTIONS">
 
-			
-			</fieldset>
-			
-			<fieldset name="category" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_CATEGORY_OPTIONS">
-			
-			<field name="phocahead1f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>	
-			
-			<field name="titlec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
-			
-			<field name="typec" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
-						<option value="activity">activity</option>
-						<option value="sport">sport</option>
-						<option value="bar">bar</option>
-						<option value="company">company</option>
-						<option value="cafe">cafe</option>
-						<option value="hotel">hotel</option>
-						<option value="restaurant">restaurant</option>
-						<option value="cause">cause</option>
-						<option value="sports_league">sports_league</option>
-						<option value="sports_team">sports_team</option>
-						<option value="band">band</option>
-						<option value="government">government</option>
-						<option value="non_profit">non_profit</option>
-						<option value="school">school</option>
-						<option value="university">university</option>
-						<option value="actor">actor</option>
-						<option value="athlete">athlete</option>
-						<option value="author">author</option>
-						<option value="director">director</option>
-						<option value="musician">musician</option>
-						<option value="politician">politician</option>
-						<option value="public_figure">public_figure</option>
-						<option value="city">city</option>
-						<option value="country">country</option>
-						<option value="landmark">landmark</option>
-						<option value="state_province">state_province</option>
-						<option value="album">album</option>
-						<option value="book">book</option>
-						<option value="drink">drink</option>
-						<option value="food">food</option>
-						<option value="game">game</option>
-						<option value="product">product</option>
-						<option value="song">song</option>
-						<option value="movie">movie</option>
-						<option value="tv_show">tv_show</option>
-						<option value="blog">blog</option>
-						<option value="website">website</option>
-						<option value="article">article</option>
-					</field>
-			
-			<field name="imagec" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
-			
-			<field name="urlc" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
-			
-			<field name="phocahead2f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>	
-			
-			<field name="site_namec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
-			
-			<field name="descriptionc" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
-			
-			<field name="displayc" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
-				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
-			</field>
-			
 
-			
-			</fieldset>
-			
-			<fieldset name="common" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_COMMON_OPTIONS">
-			<field name="app_id" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_DESC"/>
-			
-			<field name="other" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_DESC"/>
-			
-			<field name="render_type" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_NAME</option>
-				<option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_PROPERTY</option>
-			</field>
-			
-			<field name="desc_intro" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_INTROTEXT_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_INTROTEXT_DESCRIPTION_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
-				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
-			</field>
-			
-			<field name="remove_strings_description" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_DESC"/>
-			
-			<field name="disable_menu_items" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_DESC"/>
-			
-			<field name="disable_views" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_DESC"/>
-			
-			<field name="disable_options" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_DESC"/>
-			
-			<field name="parameter_image" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_PARAMETER_IMAGE_ORDERING_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_PARAMETER_IMAGE_ORDERING_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_FIRST</option>
-				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_LAST</option>
-			</field>
-			
-			<field name="change_svg_to_png" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHANGE_SVG_TO_PNG_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHANGE_SVG_TO_PNG_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
-				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
-			</field>
-			
-			
-			
-		</fieldset>
-			
-		<fieldset name="tweets" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWEETS_WITH_CARDS_OPTIONS">
-			
-			<field name="twitter_enable" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_ENABLE_TWEETS_WITH_CARDS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_ENABLE_TWEETS_WITH_CARDS_DESC">
-				<option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
-				<option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
-			</field>
-			
-			<field name="twitter_card" type="list" default="summary_large_image" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CARD_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CARD_DESC">
-				<option value="summary_large_image">summary_large_image</option>
-				<option value="summary">summary</option>
-			</field>
-			
-			<field name="twitter_site" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_DESC"/>
-			<field name="twitter_creator" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_DESC"/>
-			
-			</fieldset>
-		</fields>
-	</config>
+                <field name="phocahead1" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>
+
+                <field name="title" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
+
+                <field name="title_type" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_TITLE</option>
+                    <option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_ARTICLE_PAGE_TITLE</option>
+                    <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_TITLE</option>
+                </field>
+
+                <field name="type" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
+                    <option value="activity">activity</option>
+                    <option value="sport">sport</option>
+                    <option value="bar">bar</option>
+                    <option value="company">company</option>
+                    <option value="cafe">cafe</option>
+                    <option value="hotel">hotel</option>
+                    <option value="restaurant">restaurant</option>
+                    <option value="cause">cause</option>
+                    <option value="sports_league">sports_league</option>
+                    <option value="sports_team">sports_team</option>
+                    <option value="band">band</option>
+                    <option value="government">government</option>
+                    <option value="non_profit">non_profit</option>
+                    <option value="school">school</option>
+                    <option value="university">university</option>
+                    <option value="actor">actor</option>
+                    <option value="athlete">athlete</option>
+                    <option value="author">author</option>
+                    <option value="director">director</option>
+                    <option value="musician">musician</option>
+                    <option value="politician">politician</option>
+                    <option value="public_figure">public_figure</option>
+                    <option value="city">city</option>
+                    <option value="country">country</option>
+                    <option value="landmark">landmark</option>
+                    <option value="state_province">state_province</option>
+                    <option value="album">album</option>
+                    <option value="book">book</option>
+                    <option value="drink">drink</option>
+                    <option value="food">food</option>
+                    <option value="game">game</option>
+                    <option value="product">product</option>
+                    <option value="song">song</option>
+                    <option value="movie">movie</option>
+                    <option value="tv_show">tv_show</option>
+                    <option value="blog">blog</option>
+                    <option value="website">website</option>
+                    <option value="article">article</option>
+                </field>
+
+                <field name="image" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
+
+                <field name="url" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
+
+                <field name="phocahead2" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>
+
+                <field name="site_name" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
+
+                <field name="description" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
+
+
+            </fieldset>
+
+
+            <fieldset name="featured" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_FEATURED_OPTIONS">
+
+                <field name="phocahead1f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>
+
+                <field name="titlef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
+
+                <field name="typef" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
+                    <option value="activity">activity</option>
+                    <option value="sport">sport</option>
+                    <option value="bar">bar</option>
+                    <option value="company">company</option>
+                    <option value="cafe">cafe</option>
+                    <option value="hotel">hotel</option>
+                    <option value="restaurant">restaurant</option>
+                    <option value="cause">cause</option>
+                    <option value="sports_league">sports_league</option>
+                    <option value="sports_team">sports_team</option>
+                    <option value="band">band</option>
+                    <option value="government">government</option>
+                    <option value="non_profit">non_profit</option>
+                    <option value="school">school</option>
+                    <option value="university">university</option>
+                    <option value="actor">actor</option>
+                    <option value="athlete">athlete</option>
+                    <option value="author">author</option>
+                    <option value="director">director</option>
+                    <option value="musician">musician</option>
+                    <option value="politician">politician</option>
+                    <option value="public_figure">public_figure</option>
+                    <option value="city">city</option>
+                    <option value="country">country</option>
+                    <option value="landmark">landmark</option>
+                    <option value="state_province">state_province</option>
+                    <option value="album">album</option>
+                    <option value="book">book</option>
+                    <option value="drink">drink</option>
+                    <option value="food">food</option>
+                    <option value="game">game</option>
+                    <option value="product">product</option>
+                    <option value="song">song</option>
+                    <option value="movie">movie</option>
+                    <option value="tv_show">tv_show</option>
+                    <option value="blog">blog</option>
+                    <option value="website">website</option>
+                    <option value="article">article</option>
+                </field>
+
+                <field name="imagef" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
+
+                <field name="urlf" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
+
+                <field name="phocahead2f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>
+
+                <field name="site_namef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
+
+                <field name="descriptionf" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
+
+                <field name="displayf" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_FEATURED_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_FEATURED_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                </field>
+
+
+            </fieldset>
+
+            <fieldset name="category" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_CATEGORY_OPTIONS">
+
+                <field name="phocahead1f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_REQUIRED_PROPERTIES" label="" description=""/>
+
+                <field name="titlec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
+
+                <field name="typec" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
+                    <option value="activity">activity</option>
+                    <option value="sport">sport</option>
+                    <option value="bar">bar</option>
+                    <option value="company">company</option>
+                    <option value="cafe">cafe</option>
+                    <option value="hotel">hotel</option>
+                    <option value="restaurant">restaurant</option>
+                    <option value="cause">cause</option>
+                    <option value="sports_league">sports_league</option>
+                    <option value="sports_team">sports_team</option>
+                    <option value="band">band</option>
+                    <option value="government">government</option>
+                    <option value="non_profit">non_profit</option>
+                    <option value="school">school</option>
+                    <option value="university">university</option>
+                    <option value="actor">actor</option>
+                    <option value="athlete">athlete</option>
+                    <option value="author">author</option>
+                    <option value="director">director</option>
+                    <option value="musician">musician</option>
+                    <option value="politician">politician</option>
+                    <option value="public_figure">public_figure</option>
+                    <option value="city">city</option>
+                    <option value="country">country</option>
+                    <option value="landmark">landmark</option>
+                    <option value="state_province">state_province</option>
+                    <option value="album">album</option>
+                    <option value="book">book</option>
+                    <option value="drink">drink</option>
+                    <option value="food">food</option>
+                    <option value="game">game</option>
+                    <option value="product">product</option>
+                    <option value="song">song</option>
+                    <option value="movie">movie</option>
+                    <option value="tv_show">tv_show</option>
+                    <option value="blog">blog</option>
+                    <option value="website">website</option>
+                    <option value="article">article</option>
+                </field>
+
+                <field name="imagec" type="media" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_IMAGE_DESC"/>
+
+                <field name="urlc" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_URL_DESC"/>
+
+                <field name="phocahead2f" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_RECOMMENDED_PROPERTIES" label="" description=""/>
+
+                <field name="site_namec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_SITE_NAME_DESC"/>
+
+                <field name="descriptionc" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_DESC"/>
+
+                <field name="displayc" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                </field>
+
+
+            </fieldset>
+
+            <fieldset name="common" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_COMMON_OPTIONS">
+                <field name="app_id" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_APP_ID_DESC"/>
+
+                <field name="other" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_DESC"/>
+
+                <field name="render_type" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_NAME</option>
+                    <option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_PROPERTY</option>
+                </field>
+
+                <field name="desc_intro" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_INTROTEXT_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_INTROTEXT_DESCRIPTION_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                </field>
+
+                <field name="remove_strings_description" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_REMOVE_STRINGS_DESCRIPTION_DESC"/>
+
+                <field name="disable_menu_items" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_MENU_ITEMS_DESC"/>
+
+                <field name="disable_views" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_VIEWS_DESC"/>
+
+                <field name="disable_options" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISABLE_IN_OPTIONS_DESC"/>
+
+                <field name="parameter_image" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_PARAMETER_IMAGE_ORDERING_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_PARAMETER_IMAGE_ORDERING_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_FIRST</option>
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_LAST</option>
+                </field>
+
+                <field name="change_svg_to_png" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHANGE_SVG_TO_PNG_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHANGE_SVG_TO_PNG_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                </field>
+
+
+            </fieldset>
+
+            <fieldset name="tweets" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWEETS_WITH_CARDS_OPTIONS">
+
+                <field name="twitter_enable" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_ENABLE_TWEETS_WITH_CARDS_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_ENABLE_TWEETS_WITH_CARDS_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                </field>
+
+                <field name="twitter_card" type="list" default="summary_large_image" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CARD_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CARD_DESC">
+                    <option value="summary_large_image">summary_large_image</option>
+                    <option value="summary">summary</option>
+                </field>
+
+                <field name="twitter_site" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_SITE_DESC"/>
+                <field name="twitter_creator" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TWITTER_CREATOR_DESC"/>
+
+            </fieldset>
+
+            <fieldset name="extra_options" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_EXTRA_OPTIONS">
+
+                <field name="article_display_category_image" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_IMAGE_ARTICLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_CATEGORY_IMAGE_ARTICLE_DESC">
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                     <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES_FULL_ARTICLE_IMAGE</option>
+                     <option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES_INTRO_IMAGE</option>
+                    <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES_BOTH_IMAGES</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
 
 	<updateservers>
 		<server type="extension" name="PLG_CONTENT_PHOCAOPENGRAPH" priority="1"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaOpenGraphPlugin/master/manifest.xml]]></server>

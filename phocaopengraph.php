@@ -438,5 +438,72 @@ class plgContentPhocaOpenGraph extends JPlugin
 		}
 
 	}
+
+	/*
+	 * Extra features
+	 */
+
+	public function onContentBeforeDisplay($context, &$row, &$params, $page=0) {
+
+
+		$article_display_category_image = $this->params->get('article_display_category_image', 0);
+
+		if ((int)$article_display_category_image > 0) {
+
+
+			$app = JFactory::getApplication();
+			if ($app->isClient('site')) {
+
+				$categoryImage = '';
+				$categoryImageAlt = '';
+
+				if (isset($row->catid) && (int)$row->catid > 0) {
+					$db = JFactory::getDBO();
+					$query = ' SELECT c.params FROM #__categories AS c'
+						. ' WHERE c.id = ' . (int)$row->catid . ' LIMIT 1';
+					$db->setQuery($query);
+					$cItem = $db->loadObjectList();
+
+					if (!empty($cItem[0]->params)) {
+						//$registry = new JRegistry;
+						//$registry->loadString($cItem[0]->params);
+						//$pC = $registry->toArray();
+						$pC = json_decode($cItem[0]->params);
+
+						if (isset($pC->image) && $pC->image != '') {
+							$categoryImage = $pC->image;
+							if (isset($pC->image_alt) && $pC->image_alt != '') {
+								$categoryImageAlt = $pC->image_alt;
+							}
+						}
+
+					}
+				}
+
+				$images = json_decode($row->images);
+
+				if ((int)$article_display_category_image == 1 || (int)$article_display_category_image == 3) {
+
+					if ($images->image_fulltext == '' && $categoryImage != '') {
+						$images->image_fulltext = $categoryImage;
+						$images->image_fulltext_alt = $categoryImageAlt;
+
+						$row->images = json_encode($images);
+					}
+				}
+
+				if ((int)$article_display_category_image == 2 || (int)$article_display_category_image == 3) {
+
+					if ($images->image_intro == '' && $categoryImage != '') {
+						$images->image_intro 		= $categoryImage;
+						$images->image_intro_alt 	= $categoryImageAlt;
+
+						$row->images = json_encode($images);
+					}
+				}
+
+			}
+		}
+	}
 }
 ?>
