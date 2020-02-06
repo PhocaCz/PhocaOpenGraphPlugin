@@ -479,12 +479,16 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 					}
 				}
+				
+				if (isset($row->images)) {
 
-				$images = json_decode($row->images);
-
+					$images = json_decode($row->images);
+				} else {
+					$images = new stdClass();
+				}
 				if ((int)$article_display_category_image == 1 || (int)$article_display_category_image == 3) {
 
-					if ($images->image_fulltext == '' && $categoryImage != '') {
+					if ((!isset($images->image_fulltext) || (isset($images->image_fulltext) && $images->image_fulltext == '')) && $categoryImage != '') {
 						$images->image_fulltext = $categoryImage;
 						$images->image_fulltext_alt = $categoryImageAlt;
 
@@ -494,14 +498,13 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 				if ((int)$article_display_category_image == 2 || (int)$article_display_category_image == 3) {
 
-					if ($images->image_intro == '' && $categoryImage != '') {
+					if ((!isset($images->image_intro) || (isset($images->image_intro) && $images->image_intro == '')) && $categoryImage != '') {
 						$images->image_intro 		= $categoryImage;
 						$images->image_intro_alt 	= $categoryImageAlt;
 
 						$row->images = json_encode($images);
 					}
 				}
-
 			}
 		}
 	}
