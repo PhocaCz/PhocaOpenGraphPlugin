@@ -174,7 +174,15 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$type		= $this->params->get('render_type', 1);
 		$desc_intro	= $this->params->get('desc_intro', 0);
 		$title_type	= $this->params->get('title_type', 1);
-
+		$title_type_featured	= $this->params->get('title_type_featured', 3);
+		$title_type_category	= $this->params->get('title_type_category', 1);
+		
+		$desc_type_featured	= $this->params->get('desc_type_featured', 3);
+		$desc_type_category	= $this->params->get('desc_type_category', 1);
+		
+		$active = $app->getMenu()->getActive();
+		
+		
 
 
 
@@ -191,53 +199,54 @@ class plgContentPhocaOpenGraph extends JPlugin
 			$attribs = (is_string($row->attribs) ? json_decode($row->attribs) : $row->attribs);
 		}
 
-		if (isset($row->metadesc)) {
+		// will be set for each type
+		/*if (isset($row->metadesc)) {
 			$thisDesc 	= $row->metadesc;
-		}
-
-		if ($title_type == 3) {
-			if (isset($document->title) && $document->title != '') {
-				$thisTitle	= $document->title;
-			} else {
-				// Fallback to standard title
-				if (isset($row->title)) {
-					$thisTitle	= $row->title;
-				}
-			}
-
-		} else if ($title_type == 2) {
-			if (isset($attribs->article_page_title) && $attribs->article_page_title != '') {
-				$thisTitle	= $attribs->article_page_title;
-			} else {
-				// Fallback to standard title
-				if (isset($row->title)) {
-					$thisTitle	= $row->title;
-				}
-			}
-
-		} else {
-			if (isset($row->title)) {
-				$thisTitle	= $row->title;
-			}
-		}
-
-
-
-
-
-
+		}*/
+	
 		if (isset($row->metakey)) {
 			$thisKey	= $row->metakey;
 		}
 
 
 
-
+		// ARTICLE, FEATURED, CATEGORY
 		if ($view == 'featured' && $this->pluginNr == 0) {
+			
+			// FEATURED
+			// 3 MENU LINK TITLE
+			// 2 NOTHING
+			// 1 FIRST ARTICLE TITLE
+			if ($title_type_featured == 2) {
+				$thisTitle = '';
+			} else if ($title_type_featured == 1) {
+				if (isset($row->title)) {
+					$thisTitle	= $row->title;
+				}
+			} else if ($title_type_featured == 3) {
+				if (isset($document->title) && $document->title != '') {
+					$thisTitle	= $document->title;
+				}
+			}
+			
+			if ($desc_type_featured == 2) {
+				$thisDesc = -1;
+			} else if ($desc_type_featured == 1) {
+				if (isset($row->metadesc)) {
+					$thisDesc	= $row->metadesc;
+				}
+			} else if ($desc_type_featured == 3) {
+				if (!empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
+					$thisDesc	= $active->params->get('menu-meta_description');
+				}
+			}
+			
 			$suffix 		= 'f';// Data from first article will be set
 			$this->pluginNr = 1;
 		} else if ($view == 'category' && $this->pluginNr == 0) {
 			$suffix 		= 'c';// Data from first article will be set
+			
+			
 			if (isset($row->catid) && (int)$row->catid > 0) {
 				$db = JFactory::getDBO();
 				$query = ' SELECT c.metadesc, c.metakey, c.params, c.title FROM #__categories AS c'
@@ -268,18 +277,70 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisKey		= $cItem[0]->metakey;
 				}
 			}
+			
+			// C A T E G O R Y
+			// 3 MENU LINK TITLE
+			// 2 CATEGORY PAGE TITLE NOT EXIST
+			// 1 IF NOT 3 THEN CATEGORY TITLE
+			if ($title_type_category == 3 || $thisTitle == '') {
+				if (isset($document->title) && $document->title != '') {
+					$thisTitle	= $document->title;
+				}
+			}
+			
+			if ($desc_type_category == 3 || $thisDesc == '') {
+				if (!empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
+					$thisDesc	= $active->params->get('menu-meta_description');
+				}
+			}
+
 			$this->pluginNr = 1;
 		} else {
+			
+			// A R T I C L E
+			// 3 MENU LINK TITLE
+			// 2 ARTICLE PAGE TITLE
+			// 1 ARTICLE TITLE
+			if ($title_type == 3) {
+				if (isset($document->title) && $document->title != '') {
+					$thisTitle	= $document->title;
+				} else {
+					// Fallback to standard title
+					if (isset($row->title)) {
+						$thisTitle	= $row->title;
+					}
+				}
+			} else if ($title_type == 2) {
+				if (isset($attribs->article_page_title) && $attribs->article_page_title != '') {
+					$thisTitle	= $attribs->article_page_title;
+				} else {
+					// Fallback to standard title
+					if (isset($row->title)) {
+						$thisTitle	= $row->title;
+					}
+				}
+			} else {
+				if (isset($row->title)) {
+					$thisTitle	= $row->title;
+				}
+			}
+
 			$suffix 		= '';
+			
+			if (isset($row->metadesc)) {
+				$thisDesc 	= $row->metadesc;
+			}
 		}
 
-		// Title
 
+		// TITLE
 		if ($this->params->get('title'.$suffix, '') != '') {
 			$this->renderTag('og:title', $this->params->get('title'.$suffix, ''), $type);
-		} else if (isset($row->title) && $row->title != '') {
+		} else if (isset($thisTitle) && (int)$thisTitle == -1) {
+			// FORCE NOTHING - FEATURED VIEW
+		} else if (isset($thisTitle) && $thisTitle != '') {
 			$this->renderTag('og:title', $thisTitle, $type);
-		}
+		}			
 
 		// Type
 		$this->renderTag('og:type', $this->params->get('type'.$suffix, 'article'), $type);
@@ -376,14 +437,16 @@ class plgContentPhocaOpenGraph extends JPlugin
 		}
 
 
-		// Description
-
+		// Description - works for article only (category and featured includes $thisDesc by conditions set previously)
 		if ($this->params->get('description'.$suffix, '') != '') { // description in params
 			$this->renderTag('og:description', $this->params->get('description'.$suffix, ''), $type);
+		} else if (isset($thisDesc) && (int)$thisDesc == -1) {
+			// FORCE NOTHING - FEATURED VIEW
 		} else if (isset($thisDesc) && $thisDesc != '') { // article meta description
 			$this->renderTag('og:description', $thisDesc, $type);
-		} else if ($this->params->get('menu-meta_description') != '') { // menu link meta description
-			$this->renderTag('og:description', $this->params->get('menu-meta_description'), $type);
+		} else if ($active->params->get('menu-meta_description') != '') { // menu link meta description
+			$this->renderTag('og:description', $active->params->get('menu-meta_description'), $type);
+			
 		} else if (isset($row->introtext) && $row->introtext != '' && $desc_intro == 1) { // artcle introtext
 
 			$iTD = $row->introtext;

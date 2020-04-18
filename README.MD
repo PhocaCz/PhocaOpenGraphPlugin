@@ -24,6 +24,8 @@ Phoca Open Graph Content Plugin is a Joomla! CMS Plugin. It adds open graph info
 
 
 
+
+
 ## Support
 
 [Phoca Forum](https://www.phoca.cz/forum)
@@ -50,7 +52,7 @@ Phoca Open Graph Content Plugin is a Joomla! CMS Plugin. It adds open graph info
 
 ## Version
 
-3.1.10
+3.1.11
 
 
 

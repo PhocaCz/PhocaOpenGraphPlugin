@@ -2,12 +2,12 @@
 <extension type="plugin" group="content" method="upgrade" version="3">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>07/04/2020</creationDate>
+	<creationDate>18/04/2020</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>3.1.10</version>
+	<version>3.1.11</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
@@ -106,6 +106,18 @@
 
                 <field name="titlef" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
 
+				<field name="title_type_featured" type="list" default="3" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_FEATURED_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_FEATURED_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_FIRST_ARTICLE_TITLE</option>
+					<option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO_TITLE</option>
+                    <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_TITLE</option>
+                </field>
+				
+				<field name="desc_type_featured" type="list" default="3" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_FEATURED_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_FEATURED_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_FIRST_ARTICLE_DESCRIPTION</option>
+					<option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO_DESCRIPTION</option>
+                    <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_META_DESCRIPTION</option>
+                </field>
+				
                 <field name="typef" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
                     <option value="activity">activity</option>
                     <option value="sport">sport</option>
@@ -171,6 +183,16 @@
 
                 <field name="titlec" type="text" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_DESC"/>
 
+				<field name="title_type_category" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_CATEGORY_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TITLE_TYPE_CATEGORY_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_CATEGORY_TITLE</option>
+                    <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_TITLE</option>
+                </field>
+				
+				<field name="desc_type_category" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_CATEGORY_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_CATEGORY_DESC">
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_CATEGORY_DESCRIPTION</option>
+                    <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_META_DESCRIPTION</option>
+                </field>
+				
                 <field name="typec" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
                     <option value="activity">activity</option>
                     <option value="sport">sport</option>
