@@ -236,7 +236,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisDesc	= $row->metadesc;
 				}
 			} else if ($desc_type_featured == 3) {
-				if (!empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
+				if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
 					$thisDesc	= $active->params->get('menu-meta_description');
 				}
 			}
@@ -289,7 +289,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			}
 			
 			if ($desc_type_category == 3 || $thisDesc == '') {
-				if (!empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
+				if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
 					$thisDesc	= $active->params->get('menu-meta_description');
 				}
 			}
@@ -444,7 +444,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			// FORCE NOTHING - FEATURED VIEW
 		} else if (isset($thisDesc) && $thisDesc != '') { // article meta description
 			$this->renderTag('og:description', $thisDesc, $type);
-		} else if ($active->params->get('menu-meta_description') != '') { // menu link meta description
+		} else if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {// menu link meta description
 			$this->renderTag('og:description', $active->params->get('menu-meta_description'), $type);
 			
 		} else if (isset($row->introtext) && $row->introtext != '' && $desc_intro == 1) { // artcle introtext
