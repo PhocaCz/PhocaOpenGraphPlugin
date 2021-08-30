@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" group="content" method="upgrade" version="3">
+<extension type="plugin" group="content" method="upgrade" version="4.0">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>23/04/2020</creationDate>
+	<creationDate>30/08/2021</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>3.1.12</version>
+	<version>4.0.0</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 

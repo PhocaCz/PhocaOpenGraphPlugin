@@ -7,6 +7,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
 
+use Joomla\CMS\Uri\Uri;
+
 defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.plugin.plugin' );
 
@@ -176,13 +178,13 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$title_type	= $this->params->get('title_type', 1);
 		$title_type_featured	= $this->params->get('title_type_featured', 3);
 		$title_type_category	= $this->params->get('title_type_category', 1);
-		
+
 		$desc_type_featured	= $this->params->get('desc_type_featured', 3);
 		$desc_type_category	= $this->params->get('desc_type_category', 1);
-		
+
 		$active = $app->getMenu()->getActive();
-		
-		
+
+
 
 
 
@@ -203,7 +205,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		/*if (isset($row->metadesc)) {
 			$thisDesc 	= $row->metadesc;
 		}*/
-	
+
 		if (isset($row->metakey)) {
 			$thisKey	= $row->metakey;
 		}
@@ -212,7 +214,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 		// ARTICLE, FEATURED, CATEGORY
 		if ($view == 'featured' && $this->pluginNr == 0) {
-			
+
 			// FEATURED
 			// 3 MENU LINK TITLE
 			// 2 NOTHING
@@ -228,7 +230,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisTitle	= $document->title;
 				}
 			}
-			
+
 			if ($desc_type_featured == 2) {
 				$thisDesc = -1;
 			} else if ($desc_type_featured == 1) {
@@ -240,13 +242,13 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisDesc	= $active->params->get('menu-meta_description');
 				}
 			}
-			
+
 			$suffix 		= 'f';// Data from first article will be set
 			$this->pluginNr = 1;
 		} else if ($view == 'category' && $this->pluginNr == 0) {
 			$suffix 		= 'c';// Data from first article will be set
-			
-			
+
+
 			if (isset($row->catid) && (int)$row->catid > 0) {
 				$db = JFactory::getDBO();
 				$query = ' SELECT c.metadesc, c.metakey, c.params, c.title FROM #__categories AS c'
@@ -277,7 +279,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisKey		= $cItem[0]->metakey;
 				}
 			}
-			
+
 			// C A T E G O R Y
 			// 3 MENU LINK TITLE
 			// 2 CATEGORY PAGE TITLE NOT EXIST
@@ -287,7 +289,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$thisTitle	= $document->title;
 				}
 			}
-			
+
 			if ($desc_type_category == 3 || $thisDesc == '') {
 				if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
 					$thisDesc	= $active->params->get('menu-meta_description');
@@ -296,7 +298,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 			$this->pluginNr = 1;
 		} else {
-			
+
 			// A R T I C L E
 			// 3 MENU LINK TITLE
 			// 2 ARTICLE PAGE TITLE
@@ -326,7 +328,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			}
 
 			$suffix 		= '';
-			
+
 			if (isset($row->metadesc)) {
 				$thisDesc 	= $row->metadesc;
 			}
@@ -340,7 +342,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			// FORCE NOTHING - FEATURED VIEW
 		} else if (isset($thisTitle) && $thisTitle != '') {
 			$this->renderTag('og:title', $thisTitle, $type);
-		}			
+		}
 
 		// Type
 		$this->renderTag('og:type', $this->params->get('type'.$suffix, 'article'), $type);
@@ -424,7 +426,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			//} else if ((int)$row->id > 0) {
 			//$url = ContentHelperRoute::getArticleRoute($row->id);
 			//$document->setMetadata('og:url', JRoute::_($url));
-			$uri 	= JFactory::getURI();
+			$uri = Uri::getInstance();
 			$this->renderTag('og:url', $uri->toString(), $type);
 		}
 
@@ -446,7 +448,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			$this->renderTag('og:description', $thisDesc, $type);
 		} else if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {// menu link meta description
 			$this->renderTag('og:description', $active->params->get('menu-meta_description'), $type);
-			
+
 		} else if (isset($row->introtext) && $row->introtext != '' && $desc_intro == 1) { // artcle introtext
 
 			$iTD = $row->introtext;
@@ -542,7 +544,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 					}
 				}
-				
+
 				if (isset($row->images)) {
 
 					$images = json_decode($row->images);
