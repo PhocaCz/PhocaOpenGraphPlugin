@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -71,7 +72,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 	public function renderTag($name, $value, $type = 1) {
 
-		$document 				= JFactory::getDocument();
+		$document 				= Factory::getDocument();
 
 		// Encoded html tags can still be rendered, decode and strip tags first.
 		$value                  = strip_tags(html_entity_decode($value));
@@ -99,7 +100,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 	public function onContentAfterDisplay($context, &$row, &$params, $page=0) {
 
-		$app 	= JFactory::getApplication();
+		$app 	= Factory::getApplication();
 		$view	= $app->input->get('view');// article, category, featured
 		$option	= $app->input->get('option');// article, category, featured
 		$itemid	= $app->input->get('Itemid');
@@ -171,8 +172,8 @@ class plgContentPhocaOpenGraph extends JPlugin
 			}
 		}
 
-		$document 	= JFactory::getDocument();
-		$config 	= JFactory::getConfig();
+		$document 	= Factory::getDocument();
+		$config 	= Factory::getConfig();
 		$type		= $this->params->get('render_type', 1);
 		$desc_intro	= $this->params->get('desc_intro', 0);
 		$title_type	= $this->params->get('title_type', 1);
@@ -250,7 +251,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 
 			if (isset($row->catid) && (int)$row->catid > 0) {
-				$db = JFactory::getDBO();
+				$db = Factory::getDBO();
 				$query = ' SELECT c.metadesc, c.metakey, c.params, c.title FROM #__categories AS c'
 			    .' WHERE c.id = '.(int) $row->catid . ' LIMIT 1';
 				$db->setQuery($query);
@@ -516,14 +517,14 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if ((int)$article_display_category_image > 0) {
 
 
-			$app = JFactory::getApplication();
+			$app = Factory::getApplication();
 			if ($app->isClient('site')) {
 
 				$categoryImage = '';
 				$categoryImageAlt = '';
 
 				if (isset($row->catid) && (int)$row->catid > 0) {
-					$db = JFactory::getDBO();
+					$db = Factory::getDBO();
 					$query = ' SELECT c.params FROM #__categories AS c'
 						. ' WHERE c.id = ' . (int)$row->catid . ' LIMIT 1';
 					$db->setQuery($query);
