@@ -8,6 +8,7 @@
  */
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Uri\Uri;
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -24,7 +25,19 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$this->loadLanguage();
 	}
 
+	// https://github.com/joomla/joomla-cms/issues/35871
+	function realCleanImageUrl($img) {
+
+		$imgClean = HTMLHelper::cleanImageURL($img);
+		if ($imgClean->url != '') {
+			$img =  $imgClean->url;
+		}
+		return $img;
+	}
+
 	public function setImage($image) {
+
+
 
 		$change_svg_to_png 		= $this->params->get('change_svg_to_png', 0);
 		$linkImg 				= $image;
@@ -262,7 +275,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 					$registry->loadString($cItem[0]->params);
 					$pC = $registry->toArray();
 					if (isset($pC['image']) && $pC['image'] != '') {
-						$thisImg =  $pC['image'];
+						$thisImg = $this->realCleanImageURL($pC['image']);
 					}
 
 				}
@@ -359,17 +372,18 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 		$imgSet = 0;
 
+
 		if ($this->params->get('image'.$suffix, '') != '' && $parameterImage == 1) {
-			$this->renderTag('og:image', $this->setImage($this->params->get('image'.$suffix, '')), $type);
+			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($this->params->get('image'.$suffix, ''))), $type);
 			$imgSet = 1;
 		} else if ($thisImg != ''){
 			$this->renderTag('og:image', $this->setImage($thisImg), $type);
 			$imgSet = 1;
 		} else if (isset($pictures->{'image_intro'}) && $pictures->{'image_intro'} != '') {
-			$this->renderTag('og:image', $this->setImage($pictures->{'image_intro'}), $type);
+			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($pictures->{'image_intro'})), $type);
 			$imgSet = 1;
 		} else if (isset($pictures->{'image_fulltext'}) && $pictures->{'image_fulltext'} != '') {
-			$this->renderTag('og:image', $this->setImage($pictures->{'image_fulltext'}), $type);
+			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($pictures->{'image_fulltext'})), $type);
 			$imgSet = 1;
 		} else {
 			// Try to find image in article
@@ -385,7 +399,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			$content = $introtext . $fulltext;
 			preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', $content, $src);
 			if (isset($src[1]) && $src[1] != '') {
-				$this->renderTag('og:image', $this->setImage($src[1]), $type);
+				$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($src[1])), $type);
 				//$this->renderTag('og:image', JURI::base(false).$src[1], $type);
 				$imgSet = 1;
 			}
@@ -415,7 +429,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 		// If still image not set and parameter Image is set as last, then try to add the parameter image
 		if ($imgSet == 0 && $this->params->get('image'.$suffix, '') != '' && $parameterImage == 0) {
-			$this->renderTag('og:image', $this->setImage($this->params->get('image'.$suffix, '')), $type);
+			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($this->params->get('image'.$suffix, ''))), $type);
 		}
 
 		// END IMAGE
@@ -537,7 +551,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 						$pC = json_decode($cItem[0]->params);
 
 						if (isset($pC->image) && $pC->image != '') {
-							$categoryImage = $pC->image;
+							$categoryImage = $this->realCleanImageURL($pC->image);
 							if (isset($pC->image_alt) && $pC->image_alt != '') {
 								$categoryImageAlt = $pC->image_alt;
 							}
