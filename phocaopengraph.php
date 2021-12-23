@@ -94,7 +94,12 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if ($type == 1) {
 			$document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
 		} else {
-			$document->addCustomTag('<meta property="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'" content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
+
+			$attributes = '';
+			if ($name == 'og:image') {
+				$attributes = ' itemprop="image"';
+			}
+			$document->addCustomTag('<meta property="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'"'.$attributes.' content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
 		}
 
 		// Tweet with cards
