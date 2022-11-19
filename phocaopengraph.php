@@ -565,12 +565,16 @@ class plgContentPhocaOpenGraph extends JPlugin
 					}
 				}
 
+				$images = new stdClass();
+				
 				if (isset($row->images)) {
-
 					$images = json_decode($row->images);
-				} else {
+				}
+
+				if (!is_object($images)) {
 					$images = new stdClass();
 				}
+
 				if ((int)$article_display_category_image == 1 || (int)$article_display_category_image == 3) {
 
 					if ((!isset($images->image_fulltext) || (isset($images->image_fulltext) && $images->image_fulltext == '')) && $categoryImage != '') {
@@ -582,7 +586,6 @@ class plgContentPhocaOpenGraph extends JPlugin
 				}
 
 				if ((int)$article_display_category_image == 2 || (int)$article_display_category_image == 3) {
-
 					if ((!isset($images->image_intro) || (isset($images->image_intro) && $images->image_intro == '')) && $categoryImage != '') {
 						$images->image_intro 		= $categoryImage;
 						$images->image_intro_alt 	= $categoryImageAlt;
