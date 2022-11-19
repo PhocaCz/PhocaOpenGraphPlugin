@@ -27,7 +27,7 @@ class JFormFieldPhocaOGHead extends JFormField
 
 		//echo '<div class="clr"></div>';
 		$image		= '';
-		$style		= '<style> .ph-options-head { background-image: linear-gradient(-90deg, #129ED9,#0a5c80); color: #fff; border-radius: 3px; padding: 1em;} @media (min-width: 992px) { .ph-options-head {margin-left: -240px;}} </style>';
+		$style		= '<style> .ph-options-head { background-image: linear-gradient(-90deg, #129ED9,#0a5c80); color: #fff; border-radius: 3px; padding: 1em;} @media (min-width: 992px) { .ph-options-head {/*margin-left: -240px;*/}} </style>';
 		$document	= Factory::getDocument();
 		$document->addCustomTag($style);
 
