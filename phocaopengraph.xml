@@ -2,12 +2,12 @@
 <extension type="plugin" group="content" method="upgrade" version="4.0">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>19/11/2022</creationDate>
+	<creationDate>08/02/2023</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>4.0.4</version>
+	<version>4.0.5</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
@@ -111,13 +111,13 @@
 					<option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO_TITLE</option>
                     <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_TITLE</option>
                 </field>
-				
+
 				<field name="desc_type_featured" type="list" default="3" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_FEATURED_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_FEATURED_DESC">
                     <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_FIRST_ARTICLE_DESCRIPTION</option>
 					<option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO_DESCRIPTION</option>
                     <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_META_DESCRIPTION</option>
                 </field>
-				
+
                 <field name="typef" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
                     <option value="activity">activity</option>
                     <option value="sport">sport</option>
@@ -187,12 +187,12 @@
                     <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_CATEGORY_TITLE</option>
                     <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_TITLE</option>
                 </field>
-				
+
 				<field name="desc_type_category" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_CATEGORY_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DESCRIPTION_TYPE_CATEGORY_DESC">
                     <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_CATEGORY_DESCRIPTION</option>
                     <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_MENU_LINK_META_DESCRIPTION</option>
                 </field>
-				
+
                 <field name="typec" type="list" default="article" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_TYPE_DESC">
                     <option value="activity">activity</option>
                     <option value="sport">sport</option>
@@ -312,6 +312,13 @@
                      <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES_FULL_ARTICLE_IMAGE</option>
                      <option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES_INTRO_IMAGE</option>
                     <option value="3">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES_BOTH_IMAGES</option>
+                </field>
+
+                <field name="phocahead3" type="phocaoghead" default="PLG_CONTENT_PHOCA_OPEN_GRAPH_EXPERIMENTAL_FEATURES" label="" description=""/>
+
+                <field name="test_article_layout_param" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHECK_ARTICLE_LAYOUT_PARAMETER_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_CHECK_ARTICLE_LAYOUT_PARAMETER_DESC">
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                     <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
                 </field>
 
             </fieldset>

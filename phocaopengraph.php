@@ -21,6 +21,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 	public $twitterEnable 	= 0;
 
 	public function __construct(& $subject, $config) {
+
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 	}
@@ -133,7 +134,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if ($view == 'featured' && $this->params->get('displayf', 1) == 0) { return; }
 		if ($view == 'category' && $this->params->get('displayc', 1) == 0) { return; }
 
-
+		
 		if ((int)$this->pluginNr > 0) { return; } // Second instance in featured view or category view
 
 		$itemids 				= $this->params->get('disable_menu_items', '');
@@ -143,6 +144,16 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$parameterImage 		= $this->params->get('parameter_image', 1);
 		$this->twitterEnable 	= $this->params->get('twitter_enable', 0);
 		$twitterCard 			= $this->params->get('twitter_card', 'summary_large_image');
+		$test_article_layout_param = $this->params->get('test_article_layout_param', 0);
+
+		// Prevent confusing open graph tags by some modules
+		if ($test_article_layout_param == 1) {
+			$articleLayout = $params->get('article_layout', '');
+			if ($articleLayout == '') {
+				return;
+			}
+
+		}
 
 
 		if ($this->twitterEnable == 1) {
@@ -228,7 +239,6 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if (isset($row->metakey)) {
 			$thisKey	= $row->metakey;
 		}
-
 
 
 		// ARTICLE, FEATURED, CATEGORY
@@ -566,7 +576,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 				}
 
 				$images = new stdClass();
-				
+
 				if (isset($row->images)) {
 					$images = json_decode($row->images);
 				}
