@@ -124,7 +124,6 @@ class plgContentPhocaOpenGraph extends JPlugin
 		$option	= $app->input->get('option');// article, category, featured
 		$itemid	= $app->input->get('Itemid');
 
-
 		/*if ($view == 'article' && $app->input->get('id') != $row->id) {
 			// Page displays article so we want to set metadata for main content article only
 			return;
@@ -134,7 +133,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if ($view == 'featured' && $this->params->get('displayf', 1) == 0) { return; }
 		if ($view == 'category' && $this->params->get('displayc', 1) == 0) { return; }
 
-		
+
 		if ((int)$this->pluginNr > 0) { return; } // Second instance in featured view or category view
 
 		$itemids 				= $this->params->get('disable_menu_items', '');
