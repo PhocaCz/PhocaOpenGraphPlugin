@@ -2,12 +2,12 @@
 <extension type="plugin" group="content" method="upgrade" version="4.0">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>11/02/2023</creationDate>
+	<creationDate>13/04/2023</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>4.0.5</version>
+	<version>4.0.7</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
@@ -257,7 +257,7 @@
 
                 <field name="other" type="textarea" default="" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_OTHER_PROPERTIES_DESC"/>
 
-                <field name="render_type" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_DESC">
+                <field name="render_type" type="list" default="2" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_DESC">
                     <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_NAME</option>
                     <option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_PROPERTY</option>
                 </field>

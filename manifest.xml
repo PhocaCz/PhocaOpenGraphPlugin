@@ -10,6 +10,7 @@
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/3.1.12/plg_content_phocaopengraph_v3.1.12.zip</downloadurl>
 		</downloads>
+		<sha512>c81e95bfe332efeccb383fca922f8f4eed10b958d75356e5f9d1cf70c4c2a7ec885caf7c2e37f2d745135085ecd7cf6dec9eec78a00cab4e3b1770f3dcce27fd</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
@@ -25,11 +26,12 @@
 		<element>phocaopengraph</element>
 		<folder>content</folder>
 		<type>plugin</type>
-		<version>4.0.5</version>
-		<infourl title="Phoca Open Graph Content Plugin 4.0.5">https://www.phoca.cz/</infourl>
+		<version>4.0.7</version>
+		<infourl title="Phoca Open Graph Content Plugin 4.0.7">https://www.phoca.cz/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/4.0.5/plg_content_phocaopengraph_v4.0.5.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/4.0.7/plg_content_phocaopengraph_v4.0.7.zip</downloadurl>
 		</downloads>
+		<sha512>c81e95bfe332efeccb383fca922f8f4eed10b958d75356e5f9d1cf70c4c2a7ec885caf7c2e37f2d745135085ecd7cf6dec9eec78a00cab4e3b1770f3dcce27fd</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>

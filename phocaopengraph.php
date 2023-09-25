@@ -202,7 +202,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 		$document 	= Factory::getDocument();
 		$config 	= Factory::getConfig();
-		$type		= $this->params->get('render_type', 1);
+		$type		= $this->params->get('render_type', 2);
 		$desc_intro	= $this->params->get('desc_intro', 0);
 		$title_type	= $this->params->get('title_type', 1);
 		$title_type_featured	= $this->params->get('title_type_featured', 3);
