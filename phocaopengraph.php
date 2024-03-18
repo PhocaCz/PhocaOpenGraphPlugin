@@ -8,14 +8,17 @@
  */
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\Registry\Registry;
+use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.plugin.plugin' );
 
 
-class plgContentPhocaOpenGraph extends JPlugin
+class plgContentPhocaOpenGraph extends CMSPlugin
 {
 	public $pluginNr 		= 0;
 	public $twitterEnable 	= 0;
@@ -62,15 +65,15 @@ class plgContentPhocaOpenGraph extends JPlugin
 		if ($absU == 1) {
 			$linkImg = $image;
 		} else {
-			$linkImg = JURI::base(false).$image;
+			$linkImg = Uri::base(false).$image;
 
 			if ($image[0] == '/') {
-				$myURI = new \Joomla\Uri\Uri(JURI::base(false));
+				$myURI = new Uri(Uri::base(false));
 				$myURI->setPath($image);
 				$linkImg = $myURI->toString();
 
 			} else {
-				$linkImg = JURI::base(false).$image;
+				$linkImg = Uri::base(false).$image;
 			}
 
 			if ($change_svg_to_png == 1) {
@@ -88,6 +91,8 @@ class plgContentPhocaOpenGraph extends JPlugin
 
 		$document 				= Factory::getDocument();
 
+		$display_itemprop_image 				= $this->params->get('display_itemprop_image', 1);
+
 		// Encoded html tags can still be rendered, decode and strip tags first.
 		$value                  = strip_tags(html_entity_decode($value));
 
@@ -97,7 +102,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 		} else {
 
 			$attributes = '';
-			if ($name == 'og:image') {
+			if ($name == 'og:image' && $display_itemprop_image == 1) {
 				$attributes = ' itemprop="image"';
 			}
 			$document->addCustomTag('<meta property="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'"'.$attributes.' content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
@@ -285,7 +290,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 				$cItem = $db->loadObjectList();
 
 				if (!empty($cItem[0]->params)) {
-					$registry = new JRegistry;
+					$registry = new Registry;
 					$registry->loadString($cItem[0]->params);
 					$pC = $registry->toArray();
 					if (isset($pC['image']) && $pC['image'] != '') {
@@ -414,7 +419,7 @@ class plgContentPhocaOpenGraph extends JPlugin
 			preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', $content, $src);
 			if (isset($src[1]) && $src[1] != '') {
 				$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($src[1])), $type);
-				//$this->renderTag('og:image', JURI::base(false).$src[1], $type);
+				//$this->renderTag('og:image', Uri::base(false).$src[1], $type);
 				$imgSet = 1;
 			}
 
@@ -425,11 +430,11 @@ class plgContentPhocaOpenGraph extends JPlugin
 					jimport( 'joomla.filesystem.file' );
 					$imgPath	= '';
 					$path 		= JPATH_ROOT . '/images/phocaopengraph/';
-					if (JFile::exists($path . '/' . (int)$row->id.'.jpg')) {
+					if (File::exists($path . '/' . (int)$row->id.'.jpg')) {
 						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.jpg';
-					} else if (JFile::exists($path . '/' . (int)$row->id.'.png')) {
+					} else if (File::exists($path . '/' . (int)$row->id.'.png')) {
 						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.png';
-					} else if (JFile::exists($path . '/' . (int)$row->id.'.gif')) {
+					} else if (File::exists($path . '/' . (int)$row->id.'.gif')) {
 						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.gif';
 					}
 

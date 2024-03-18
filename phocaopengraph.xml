@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" group="content" method="upgrade" version="4.0">
+<extension type="plugin" group="content" method="upgrade" version="5.0">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>25/09/2023</creationDate>
+	<creationDate>10/12/2023</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>4.0.7</version>
+	<version>5.0.0</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
@@ -260,6 +260,11 @@
                 <field name="render_type" type="list" default="2" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_RENDER_TYPE_DESC">
                     <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_NAME</option>
                     <option value="2">PLG_CONTENT_PHOCA_OPEN_GRAPH_PROPERTY</option>
+                </field>
+
+                <field name="display_itemprop_image" type="list" default="1" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_ITEMPROP_IMAGE_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_DISPLAY_ITEMPROP_IMAGE_DESC">
+                    <option value="0">PLG_CONTENT_PHOCA_OPEN_GRAPH_NO</option>
+                    <option value="1">PLG_CONTENT_PHOCA_OPEN_GRAPH_YES</option>
                 </field>
 
                 <field name="desc_intro" type="list" default="0" label="PLG_CONTENT_PHOCA_OPEN_GRAPH_INTROTEXT_DESCRIPTION_LABEL" description="PLG_CONTENT_PHOCA_OPEN_GRAPH_INTROTEXT_DESCRIPTION_DESC">
