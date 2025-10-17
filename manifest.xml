@@ -47,19 +47,40 @@
 		<element>phocaopengraph</element>
 		<folder>content</folder>
 		<type>plugin</type>
-		<version>5.0.1</version>
-		<infourl title="Phoca Open Graph Content Plugin 5.0.1">https://www.phoca.cz/</infourl>
+		<version>5.0.2</version>
+		<infourl title="Phoca Open Graph Content Plugin 5.0.2">https://www.phoca.cz/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/5.0.1/plg_content_phocaopengraph_v5.0.1.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/5.0.2/plg_content_phocaopengraph_v5.0.2.zip</downloadurl>
 		</downloads>
-		<sha512>91cd8ce0280b3df2febd642f234250c4551d054e701d27ba07453b19a46071a93ed8f12ecc98bb445b107bd9b9f2086055778c4046ca84d1695f26c002d89f3d</sha512>
+		<sha512>d1f077b1481624f7485e2a5a70fc1df9ffdf909a1f52c00594137a38c67adf59ac83af590bde69730cce165ba40821837a1cdd8b8d6b9e3319900e441a889e5d</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
 		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
-		<targetplatform name="joomla" version="(4|5)\.*"/>
+		<targetplatform name="joomla" version="5\.*"/>
+		<client>site</client>
+	</update>
+	<update>
+		<name><![CDATA[ Phoca Open Graph Content Plugin ]]></name>
+		<description><![CDATA[ Phoca Open Graph Content Plugin is a Joomla! CMS Plugin. It adds open graph information meta tags into website html source code. Such information stored in meta tags can be automatically displayed on social media websites. ]]></description>
+		<element>phocaopengraph</element>
+		<folder>content</folder>
+		<type>plugin</type>
+		<version>6.0.0</version>
+		<infourl title="Phoca Open Graph Content Plugin 6.0.0">https://www.phoca.cz/</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.0/plg_content_phocaopengraph_v6.0.0.zip</downloadurl>
+		</downloads>
+		<sha512>ca0ae1608174465de4479a7aab7e7d8f7ca9a127c31b96f6ed651974b3cb00f677c53a1d38f1ab2a0e75c71e6a3910ea9a39813583900b7b7d5b62b0ea70b915</sha512>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
+		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="(5|6)\.*"/>
 		<client>site</client>
 	</update>
 </updates>

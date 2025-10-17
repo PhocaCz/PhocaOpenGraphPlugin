@@ -8,7 +8,6 @@
  */
 
 use Joomla\CMS\Factory;
-use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Plugin\CMSPlugin;
@@ -128,11 +127,11 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 	public function onContentAfterDisplay($context, &$row, &$params, $page=0) {
 
 		$app 	= Factory::getApplication();
-		$view	= $app->input->get('view');// article, category, featured
-		$option	= $app->input->get('option');// article, category, featured
-		$itemid	= $app->input->get('Itemid');
+		$view	= $app->getInput()->get('view');// article, category, featured
+		$option	= $app->getInput()->get('option');// article, category, featured
+		$itemid	= $app->getInput()->get('Itemid');
 
-		/*if ($view == 'article' && $app->input->get('id') != $row->id) {
+		/*if ($view == 'article' && $app->getInput()->get('id') != $row->id) {
 			// Page displays article so we want to set metadata for main content article only
 			return;
 		}*/
@@ -220,6 +219,10 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		$desc_type_category	= $this->params->get('desc_type_category', 1);
 
 		$active = $app->getMenu()->getActive();
+		$activeParams = [];
+		if ($active) {
+			$activeParams = $active->getParams();
+		}
 
 
 
@@ -274,8 +277,8 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 					$thisDesc	= $row->metadesc;
 				}
 			} else if ($desc_type_featured == 3) {
-				if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
-					$thisDesc	= $active->params->get('menu-meta_description');
+				if (!empty($activeParams->get('menu-meta_description')) && $activeParams->get('menu-meta_description') != '') {
+					$thisDesc	= $activeParams->get('menu-meta_description');
 				}
 			}
 
@@ -327,8 +330,8 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 			}
 
 			if ($desc_type_category == 3 || $thisDesc == '') {
-				if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {
-					$thisDesc	= $active->params->get('menu-meta_description');
+				if (!empty($activeParams->get('menu-meta_description')) && $activeParams->get('menu-meta_description') != '') {
+					$thisDesc	= $activeParams->get('menu-meta_description');
 				}
 			}
 
@@ -433,11 +436,11 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 					jimport( 'joomla.filesystem.file' );
 					$imgPath	= '';
 					$path 		= JPATH_ROOT . '/images/phocaopengraph/';
-					if (File::exists($path . '/' . (int)$row->id.'.jpg')) {
+					if (is_file($path . '/' . (int)$row->id.'.jpg')) {
 						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.jpg';
-					} else if (File::exists($path . '/' . (int)$row->id.'.png')) {
+					} else if (is_file($path . '/' . (int)$row->id.'.png')) {
 						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.png';
-					} else if (File::exists($path . '/' . (int)$row->id.'.gif')) {
+					} else if (is_file($path . '/' . (int)$row->id.'.gif')) {
 						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.gif';
 					}
 
@@ -483,8 +486,8 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 			// FORCE NOTHING - FEATURED VIEW
 		} else if (isset($thisDesc) && $thisDesc != '') { // article meta description
 			$this->renderTag('og:description', $thisDesc, $type);
-		} else if (isset($active->params) && !empty($active->params->get('menu-meta_description')) && $active->params->get('menu-meta_description') != '') {// menu link meta description
-			$this->renderTag('og:description', $active->params->get('menu-meta_description'), $type);
+		} else if (!empty($activeParams->get('menu-meta_description')) && $activeParams->get('menu-meta_description') != '') {// menu link meta description
+			$this->renderTag('og:description', $activeParams->get('menu-meta_description'), $type);
 
 		} else if (isset($row->introtext) && $row->introtext != '' && $desc_intro == 1) { // artcle introtext
 
