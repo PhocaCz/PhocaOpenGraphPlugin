@@ -12,6 +12,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Language\LanguageHelper;
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.plugin.plugin' );
@@ -516,7 +517,16 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 			$this->renderTag('og:description', $iTD, $type);
 		} else if ($config->get('MetaDesc') != '') { // site meta desc
-			$this->renderTag('og:description', $config->get('MetaDesc'), $type);
+			//fix language metadesc via rewrite in Content Language -> Options
+			$lang_code = Factory::getApplication()->getLanguage()->getTag(); // např. cs-CZ
+			$languages = LanguageHelper::getLanguages('lang_code');
+			if (isset($languages[$lang_code]) && $languages[$lang_code]->metadesc) {
+				$description = $languages[$lang_code]->metadesc;
+			} else {
+				$description = $config->get('MetaDesc');
+			}
+			$this->renderTag('og:description', $description, $type);
+			//$this->renderTag('og:description', $config->get('MetaDesc'), $type);
 		}
 
 		// FB App ID - COMMON
