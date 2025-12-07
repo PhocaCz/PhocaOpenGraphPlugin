@@ -22,6 +22,7 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 {
 	public $pluginNr 		= 0;
 	public $twitterEnable 	= 0;
+	protected $autoloadLanguage = true;
 
 	public function __construct(& $subject, $config) {
 
@@ -517,8 +518,9 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 			$this->renderTag('og:description', $iTD, $type);
 		} else if ($config->get('MetaDesc') != '') { // site meta desc
-			//fix language metadesc via rewrite in Content Language -> Options
-			$lang_code = Factory::getApplication()->getLanguage()->getTag(); // např. cs-CZ
+
+			// Fix language metadesc via rewrite in Content Language -> Options
+			$lang_code = Factory::getApplication()->getLanguage()->getTag(); // e.g. en-GB
 			$languages = LanguageHelper::getLanguages('lang_code');
 			if (isset($languages[$lang_code]) && $languages[$lang_code]->metadesc) {
 				$description = $languages[$lang_code]->metadesc;
