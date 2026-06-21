@@ -68,12 +68,12 @@
 		<element>phocaopengraph</element>
 		<folder>content</folder>
 		<type>plugin</type>
-		<version>6.0.1</version>
-		<infourl title="Phoca Open Graph Content Plugin 6.0.1">https://www.phoca.cz/</infourl>
+		<version>6.0.2</version>
+		<infourl title="Phoca Open Graph Content Plugin 6.0.2">https://www.phoca.cz/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.1/plg_content_phocaopengraph_v6.0.1.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.2/plg_content_phocaopengraph_v6.0.2.zip</downloadurl>
 		</downloads>
-		<sha512>5e3c55a7db86745a45c7d2d0b0b9e46b28c015ccb8ffc758072f76c0f512d554be05c79cc0cda7ef2b3d9e11b81cc5e0b71d1ead1edd3457c9a4b1b83c27f1fc</sha512>
+		<sha512>7ac3f82b7406a1e468b21471305ba5aa5639ced8ca44a6b5fe54bb4629ec408cc5d24f89ff092a4083577111b626a5f9f8c2412be5fa89a7e24bba65b276040c</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>

@@ -221,13 +221,11 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		$desc_type_category	= $this->params->get('desc_type_category', 1);
 
 		$active = $app->getMenu()->getActive();
-		$activeParams = [];
+		/*$activeParams = [];
 		if ($active) {
 			$activeParams = $active->getParams();
-		}
-
-
-
+		}*/
+		$activeParams = $active ? $active->getParams() : new Registry();
 
 
 		// We need help variables as we cannot change the $row variable - such then will influence global settings
