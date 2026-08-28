@@ -90,40 +90,47 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 	public function renderTag($name, $value, $type = 1) {
 
-		$document 				= Factory::getDocument();
+	   $document = Factory::getDocument();
+	   $display_itemprop_image = $this->params->get('display_itemprop_image', 0);
 
-		$display_itemprop_image 				= $this->params->get('display_itemprop_image', 0);
+	   // Encoded html tags can still be rendered, decode and strip tags first.
+	   $value = strip_tags(html_entity_decode($value));
 
-		// Encoded html tags can still be rendered, decode and strip tags first.
-		$value                  = strip_tags(html_entity_decode($value));
+	   // OG
+	   $attributes = '';
+	   if ($name == 'og:image' && $display_itemprop_image == 1) {
+		  $attributes = ' itemprop="image"';
+	   }
 
-		// OG
-		$attributes = '';
-		if ($name == 'og:image' && $display_itemprop_image == 1) {
-			$attributes = ' itemprop="image"';
-		}
-		$typeString = 'name';
-		if ($type != 1) {
-			$typeString = 'property';
-		}
-		if ($attributes != '') {
-			$document->addCustomTag('<meta '.$typeString.'="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'"'.$attributes.' content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
-		} else {
-			$document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), htmlspecialchars($value, ENT_COMPAT, 'UTF-8'), $typeString);
-		}
+	   $typeString = 'name';
+	   if ($type != 1) {
+		  $typeString = 'property';
+	   }
 
-		// Tweet with cards
-		if ($this->twitterEnable == 1) {
-			if ($name == 'og:title') {
-				$document->setMetadata('twitter:title', htmlspecialchars($value, ENT_COMPAT , 'UTF-8'));
-			}
-			if ($name == 'og:description') {
-				$document->setMetadata('twitter:description', htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
-			}
-			if ($name == 'og:image') {
-				$document->setMetadata('twitter:image', htmlspecialchars($value, ENT_COMPAT, 'UTF-8'));
-			}
-		}
+	   if ($attributes != '') {
+		  // addCustomTag builds raw HTML directly, so we MUST manually encode both name and value here.
+		  $document->addCustomTag('<meta '.$typeString.'="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'"'.$attributes.' content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
+	   } else {
+		  // setMetadata handles its own encoding in Joomla core!
+		  // Passing htmlspecialchars($value) here would cause double-encoding.
+		  $document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), $value, $typeString);
+	   }
+
+	   // Tweet with cards
+	   if ($this->twitterEnable == 1) {
+		  if ($name == 'og:title') {
+			 // Remove htmlspecialchars() from $value
+			 $document->setMetadata('twitter:title', $value);
+		  }
+		  if ($name == 'og:description') {
+			 // Remove htmlspecialchars() from $value
+			 $document->setMetadata('twitter:description', $value);
+		  }
+		  if ($name == 'og:image') {
+			 // Remove htmlspecialchars() from $value
+			 $document->setMetadata('twitter:image', $value);
+		  }
+	   }
 	}
 
 	public function onContentAfterDisplay($context, &$row, &$params, $page=0) {

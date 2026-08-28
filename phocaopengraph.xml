@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" group="content" method="upgrade" version="6.0">
+<extension type="plugin" group="content" method="upgrade" version="4.0">
 	<name>plg_content_phocaopengraph</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>21/06/2026</creationDate>
+	<creationDate>28/08/2026</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>6.0.2</version>
+	<version>4.0.7</version>
 	<description>PLG_CONTENT_PHOCAOPENGRAPH_DESCRIPTION</description>
 	<projectName>PhocaOpenGraphPlugin</projectName>
 
 	<files>
 		<folder>models</folder>
+		<filename plugin="phocaopengraph">FOSS.md</filename>
 		<filename plugin="phocaopengraph">index.html</filename>
+		<filename plugin="phocaopengraph">LICENSE</filename>
 		<filename plugin="phocaopengraph">phocaopengraph.php</filename>
 		<filename plugin="phocaopengraph">manifest.xml</filename>
 	</files>

@@ -31,7 +31,7 @@
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/4.0.7/plg_content_phocaopengraph_v4.0.7.zip</downloadurl>
 		</downloads>
-		<sha512>e2d20d1b25bfe541db0883578cb8453a97b913040b3ae8505098aba58cbc09dbb80810b8b5177a225cca2df6cada0cd457c3f1881b95fe10b993d5a68a196709</sha512>
+		<sha512>3282486044d353a1f206d38005c2ba8cc66ad7d8c2a76d0d957f3f692f177af30772d0ea18953936fa94ad6bb3600aaa6163e8505d2fc19a446fcc3cf15eb989</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
@@ -68,19 +68,18 @@
 		<element>phocaopengraph</element>
 		<folder>content</folder>
 		<type>plugin</type>
-		<version>6.0.2</version>
-		<infourl title="Phoca Open Graph Content Plugin 6.0.2">https://www.phoca.cz/</infourl>
+		<version>6.0.3</version>
+		<infourl title="Phoca Open Graph Content Plugin 6.0.3">https://www.phoca.cz/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.2/plg_content_phocaopengraph_v6.0.2.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.3/plg_content_phocaopengraph_v6.0.3.zip</downloadurl>
 		</downloads>
-		<sha512>7ac3f82b7406a1e468b21471305ba5aa5639ced8ca44a6b5fe54bb4629ec408cc5d24f89ff092a4083577111b626a5f9f8c2412be5fa89a7e24bba65b276040c</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
 		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
-		<targetplatform name="joomla" version="(5|6)\.*"/>
+		<targetplatform name="joomla" version="6\.*"/>
 		<client>site</client>
 	</update>
 </updates>
