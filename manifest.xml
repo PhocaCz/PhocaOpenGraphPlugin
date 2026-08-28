@@ -73,6 +73,7 @@
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.3/plg_content_phocaopengraph_v6.0.3.zip</downloadurl>
 		</downloads>
+		<sha512>ed53894ce6041a7ad8ba4b1cbdbcd93447b4cf689d8d86df02325e528b220485d0d88ec1e11d81bff3ccb7c16044522994dfab4b5daf5af01e2d3bef45861f67</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
