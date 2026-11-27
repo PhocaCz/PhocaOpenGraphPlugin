@@ -14,8 +14,8 @@
 		<tags>
 			<tag>stable</tag>
 		</tags>
-		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
-		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<maintainer><![CDATA[ Phoca FOSS & Open Source Community ]]></maintainer>
+		<maintainerurl>https://github.com/PhocaCz</maintainerurl>
 		<section>Updates</section>
 		<targetplatform name="joomla" version="3.([89]|10)"/>
 		<client>site</client>
@@ -35,8 +35,8 @@
 		<tags>
 			<tag>stable</tag>
 		</tags>
-		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
-		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<maintainer><![CDATA[ Phoca FOSS & Open Source Community ]]></maintainer>
+		<maintainerurl>https://github.com/PhocaCz</maintainerurl>
 		<section>Updates</section>
 		<targetplatform name="joomla" version="4\.*"/>
 		<client>site</client>
@@ -56,8 +56,8 @@
 		<tags>
 			<tag>stable</tag>
 		</tags>
-		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
-		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<maintainer><![CDATA[ Phoca FOSS & Open Source Community ]]></maintainer>
+		<maintainerurl>https://github.com/PhocaCz</maintainerurl>
 		<section>Updates</section>
 		<targetplatform name="joomla" version="5\.*"/>
 		<client>site</client>
@@ -68,17 +68,18 @@
 		<element>phocaopengraph</element>
 		<folder>content</folder>
 		<type>plugin</type>
-		<version>6.0.3</version>
-		<infourl title="Phoca Open Graph Content Plugin 6.0.3">https://www.phoca.cz/</infourl>
+		<version>6.0.4</version>
+		<infourl title="Phoca Open Graph Content Plugin 6.0.4">https://www.phoca.cz/</infourl>
+		<changelogurl>https://raw.githubusercontent.com/PhocaCz/PhocaOpenGraphPlugin/master/changelog6.xml</changelogurl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.3/plg_content_phocaopengraph_v6.0.3.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaOpenGraphPlugin/releases/download/6.0.4/plg_content_phocaopengraph_v6.0.4.zip</downloadurl>
 		</downloads>
-		<sha512>ed53894ce6041a7ad8ba4b1cbdbcd93447b4cf689d8d86df02325e528b220485d0d88ec1e11d81bff3ccb7c16044522994dfab4b5daf5af01e2d3bef45861f67</sha512>
+		<sha512>9cfc9f9bfc9a46d9d39f61ee34a14ad5792c3667cc2dc40b8e1e2bfa3c547000ac3b947b87f946ee43f7fcc38f49f0956b8e2d8bc335e9d68dc879727bc9624e</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
-		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
-		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<maintainer><![CDATA[ Phoca FOSS & Open Source Community ]]></maintainer>
+		<maintainerurl>https://github.com/PhocaCz</maintainerurl>
 		<section>Updates</section>
 		<targetplatform name="joomla" version="6\.*"/>
 		<client>site</client>

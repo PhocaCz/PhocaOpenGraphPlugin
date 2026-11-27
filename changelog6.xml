@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelogs>
+	<changelog>
+		<element>phocaopengraph</element>
+		<type>plugin</type>
+		<version>6.0.4</version>
+		<change>
+			<item><![CDATA[Handled $row-&gt;images when already an array in onContentBeforeDisplay().]]></item>
+			<item><![CDATA[Skipped adding meta tags in onContentAfterDisplay() for non-HTML documents.]]></item>
+		</change>
+	</changelog>
+</changelogs>

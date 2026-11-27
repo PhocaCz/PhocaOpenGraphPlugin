@@ -69,7 +69,7 @@ If you need additional information beyond this GitHub repository, further docume
 ### Version (Joomla! 5.x - no longer supported)
 5.0.2
 ### Version (Joomla! 6.x)
-6.0.3
+6.0.4
 
 ### License
 

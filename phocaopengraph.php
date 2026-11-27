@@ -13,50 +13,54 @@ use Joomla\Registry\Registry;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language\LanguageHelper;
-
-defined( '_JEXEC' ) or die( 'Restricted access' );
-jimport( 'joomla.plugin.plugin' );
+use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Document\HtmlDocument;
+defined('_JEXEC') or die('Restricted access');
+jimport('joomla.plugin.plugin');
 
 
 class plgContentPhocaOpenGraph extends CMSPlugin
 {
-	public $pluginNr 		= 0;
-	public $twitterEnable 	= 0;
+	public $pluginNr = 0;
+	public $twitterEnable = 0;
 	protected $autoloadLanguage = true;
 
-	public function __construct(& $subject, $config) {
+	public function __construct(&$subject, $config)
+	{
 
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 	}
 
 	// https://github.com/joomla/joomla-cms/issues/35871
-	function realCleanImageUrl($img) {
+	function realCleanImageUrl($img)
+	{
 
 		$imgClean = HTMLHelper::cleanImageURL($img);
 		if ($imgClean->url != '') {
-			$img =  $imgClean->url;
+			$img = $imgClean->url;
 		}
 		return $img;
 	}
 
-	public function setImage($image) {
+	public function setImage($image)
+	{
 
 
 
-		$change_svg_to_png 		= $this->params->get('change_svg_to_png', 0);
-		$linkImg 				= $image;
+		$change_svg_to_png = $this->params->get('change_svg_to_png', 0);
+		$linkImg = $image;
 
 		$absU = 0;
 		// Test if this link is absolute http:// then do not change it
-		$pos1 			= strpos($image, 'http://');
+		$pos1 = strpos($image, 'http://');
 		if ($pos1 === false) {
 		} else {
 			$absU = 1;
 		}
 
 		// Test if this link is absolute https:// then do not change it
-		$pos2 			= strpos($image, 'https://');
+		$pos2 = strpos($image, 'https://');
 		if ($pos2 === false) {
 		} else {
 			$absU = 1;
@@ -66,7 +70,7 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		if ($absU == 1) {
 			$linkImg = $image;
 		} else {
-			$linkImg = Uri::base(false).$image;
+			$linkImg = Uri::base(false) . $image;
 
 			if ($image[0] == '/') {
 				$myURI = new Uri(Uri::base(false));
@@ -74,13 +78,13 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 				$linkImg = $myURI->toString();
 
 			} else {
-				$linkImg = Uri::base(false).$image;
+				$linkImg = Uri::base(false) . $image;
 			}
 
 			if ($change_svg_to_png == 1) {
-				$pathInfo 	= pathinfo($linkImg);
+				$pathInfo = pathinfo($linkImg);
 				if (isset($pathInfo['extension']) && $pathInfo['extension'] == 'svg') {
-					$linkImg 	= $pathInfo['dirname'] .'/'. $pathInfo['filename'] . '.png';
+					$linkImg = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . '.png';
 				}
 			}
 		}
@@ -88,77 +92,97 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		return $linkImg;
 	}
 
-	public function renderTag($name, $value, $type = 1) {
+	public function renderTag($name, $value, $type = 1)
+	{
 
-	   $document = Factory::getDocument();
-	   $display_itemprop_image = $this->params->get('display_itemprop_image', 0);
+		/** @var CMSApplication $app */
+		$app = Factory::getApplication();
+		/** @var HtmlDocument $document */
+		$document = $app->getDocument();
+		$display_itemprop_image = $this->params->get('display_itemprop_image', 0);
 
-	   // Encoded html tags can still be rendered, decode and strip tags first.
-	   $value = strip_tags(html_entity_decode($value));
+		// Encoded html tags can still be rendered, decode and strip tags first.
+		$value = strip_tags(html_entity_decode($value));
 
-	   // OG
-	   $attributes = '';
-	   if ($name == 'og:image' && $display_itemprop_image == 1) {
-		  $attributes = ' itemprop="image"';
-	   }
+		// OG
+		$attributes = '';
+		if ($name == 'og:image' && $display_itemprop_image == 1) {
+			$attributes = ' itemprop="image"';
+		}
 
-	   $typeString = 'name';
-	   if ($type != 1) {
-		  $typeString = 'property';
-	   }
+		$typeString = 'name';
+		if ($type != 1) {
+			$typeString = 'property';
+		}
 
-	   if ($attributes != '') {
-		  // addCustomTag builds raw HTML directly, so we MUST manually encode both name and value here.
-		  $document->addCustomTag('<meta '.$typeString.'="'.htmlspecialchars($name, ENT_COMPAT, 'UTF-8').'"'.$attributes.' content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
-	   } else {
-		  // setMetadata handles its own encoding in Joomla core!
-		  // Passing htmlspecialchars($value) here would cause double-encoding.
-		  $document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), $value, $typeString);
-	   }
+		if ($attributes != '') {
+			// addCustomTag builds raw HTML directly, so we MUST manually encode both name and value here.
+			$document->addCustomTag('<meta ' . $typeString . '="' . htmlspecialchars($name, ENT_COMPAT, 'UTF-8') . '"' . $attributes . ' content="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />');
+		} else {
+			// setMetadata handles its own encoding in Joomla core!
+			// Passing htmlspecialchars($value) here would cause double-encoding.
+			$document->setMetadata(htmlspecialchars($name, ENT_COMPAT, 'UTF-8'), $value, $typeString);
+		}
 
-	   // Tweet with cards
-	   if ($this->twitterEnable == 1) {
-		  if ($name == 'og:title') {
-			 // Remove htmlspecialchars() from $value
-			 $document->setMetadata('twitter:title', $value);
-		  }
-		  if ($name == 'og:description') {
-			 // Remove htmlspecialchars() from $value
-			 $document->setMetadata('twitter:description', $value);
-		  }
-		  if ($name == 'og:image') {
-			 // Remove htmlspecialchars() from $value
-			 $document->setMetadata('twitter:image', $value);
-		  }
-	   }
+		// Tweet with cards
+		if ($this->twitterEnable == 1) {
+			if ($name == 'og:title') {
+				// Remove htmlspecialchars() from $value
+				$document->setMetadata('twitter:title', $value);
+			}
+			if ($name == 'og:description') {
+				// Remove htmlspecialchars() from $value
+				$document->setMetadata('twitter:description', $value);
+			}
+			if ($name == 'og:image') {
+				// Remove htmlspecialchars() from $value
+				$document->setMetadata('twitter:image', $value);
+			}
+		}
 	}
 
-	public function onContentAfterDisplay($context, &$row, &$params, $page=0) {
+	public function onContentAfterDisplay($context, &$row, &$params, $page = 0)
+	{
 
-		$app 	= Factory::getApplication();
-		$view	= $app->getInput()->get('view');// article, category, featured
-		$option	= $app->getInput()->get('option');// article, category, featured
-		$itemid	= $app->getInput()->get('Itemid');
+		/** @var CMSApplication $app */
+		$app = Factory::getApplication();
+		$document = $app->getDocument();
+		$view = $app->getInput()->get('view');// article, category, featured
+		$option = $app->getInput()->get('option');// article, category, featured
+		$itemid = $app->getInput()->get('Itemid');
 
 		/*if ($view == 'article' && $app->getInput()->get('id') != $row->id) {
 			// Page displays article so we want to set metadata for main content article only
 			return;
 		}*/
-		if ($app->getName() != 'site') { return;}
-		if ($view == 'tag') { return; }
-		if ($view == 'featured' && $this->params->get('displayf', 1) == 0) { return; }
-		if ($view == 'category' && $this->params->get('displayc', 1) == 0) { return; }
+		if ($app->getName() != 'site') {
+			return;
+		}
+		if ($document->getType() !== 'html') {
+			return;
+		}
+		if ($view == 'tag') {
+			return;
+		}
+		if ($view == 'featured' && $this->params->get('displayf', 1) == 0) {
+			return;
+		}
+		if ($view == 'category' && $this->params->get('displayc', 1) == 0) {
+			return;
+		}
 
 
-		if ((int)$this->pluginNr > 0) { return; } // Second instance in featured view or category view
+		if ((int) $this->pluginNr > 0) {
+			return;
+		} // Second instance in featured view or category view
 
-		$itemids 				= $this->params->get('disable_menu_items', '');
-		$options 				= $this->params->get('disable_options', '');
-		$views 					= $this->params->get('disable_views', '');
-		$rSD 					= $this->params->get('remove_strings_description', '');
-		$parameterImage 		= $this->params->get('parameter_image', 1);
-		$this->twitterEnable 	= $this->params->get('twitter_enable', 0);
-		$twitterCard 			= $this->params->get('twitter_card', 'summary_large_image');
+		$itemids = $this->params->get('disable_menu_items', '');
+		$options = $this->params->get('disable_options', '');
+		$views = $this->params->get('disable_views', '');
+		$rSD = $this->params->get('remove_strings_description', '');
+		$parameterImage = $this->params->get('parameter_image', 1);
+		$this->twitterEnable = $this->params->get('twitter_enable', 0);
+		$twitterCard = $this->params->get('twitter_card', 'summary_large_image');
 		$test_article_layout_param = $this->params->get('test_article_layout_param', 0);
 
 		// Prevent confusing open graph tags by some modules
@@ -184,7 +208,7 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		}
 
 		if ($itemids != '') {
-			$itemidsA =  explode(',', $itemids);
+			$itemidsA = explode(',', $itemids);
 			if (!empty($itemidsA)) {
 				foreach ($itemidsA as $k => $v) {
 					if ($itemid == $v) {
@@ -195,7 +219,7 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		}
 
 		if ($options != '') {
-			$optionsA =  explode(',', $options);
+			$optionsA = explode(',', $options);
 			if (!empty($optionsA)) {
 				foreach ($optionsA as $k => $v) {
 					if ($option == $v) {
@@ -206,7 +230,7 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		}
 
 		if ($views != '') {
-			$viewsA =  explode(',', $views);
+			$viewsA = explode(',', $views);
 			if (!empty($viewsA)) {
 				foreach ($viewsA as $k => $v) {
 					if ($view == $v) {
@@ -216,16 +240,16 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 			}
 		}
 
-		$document 	= Factory::getDocument();
-		$config 	= Factory::getConfig();
-		$type		= $this->params->get('render_type', 2);
-		$desc_intro	= $this->params->get('desc_intro', 0);
-		$title_type	= $this->params->get('title_type', 1);
-		$title_type_featured	= $this->params->get('title_type_featured', 3);
-		$title_type_category	= $this->params->get('title_type_category', 1);
+		//$document = Factory::getDocument();
+		$config = $app->getConfig();
+		$type = $this->params->get('render_type', 2);
+		$desc_intro = $this->params->get('desc_intro', 0);
+		$title_type = $this->params->get('title_type', 1);
+		$title_type_featured = $this->params->get('title_type_featured', 3);
+		$title_type_category = $this->params->get('title_type_category', 1);
 
-		$desc_type_featured	= $this->params->get('desc_type_featured', 3);
-		$desc_type_category	= $this->params->get('desc_type_category', 1);
+		$desc_type_featured = $this->params->get('desc_type_featured', 3);
+		$desc_type_category = $this->params->get('desc_type_category', 1);
 
 		$active = $app->getMenu()->getActive();
 		/*$activeParams = [];
@@ -236,10 +260,10 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 
 		// We need help variables as we cannot change the $row variable - such then will influence global settings
-		$thisDesc 	= '';
-		$thisTitle	= '';
-		$thisKey	= '';
-		$thisImg	= '';
+		$thisDesc = '';
+		$thisTitle = '';
+		$thisKey = '';
+		$thisImg = '';
 
 		// Attributes
 		$attribs = '';
@@ -254,7 +278,7 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		}*/
 
 		if (isset($row->metakey)) {
-			$thisKey	= $row->metakey;
+			$thisKey = $row->metakey;
 		}
 
 
@@ -269,11 +293,11 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 				$thisTitle = '';
 			} else if ($title_type_featured == 1) {
 				if (isset($row->title)) {
-					$thisTitle	= $row->title;
+					$thisTitle = $row->title;
 				}
 			} else if ($title_type_featured == 3) {
 				if (isset($document->title) && $document->title != '') {
-					$thisTitle	= $document->title;
+					$thisTitle = $document->title;
 				}
 			}
 
@@ -281,24 +305,24 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 				$thisDesc = -1;
 			} else if ($desc_type_featured == 1) {
 				if (isset($row->metadesc)) {
-					$thisDesc	= $row->metadesc;
+					$thisDesc = $row->metadesc;
 				}
 			} else if ($desc_type_featured == 3) {
 				if (!empty($activeParams->get('menu-meta_description')) && $activeParams->get('menu-meta_description') != '') {
-					$thisDesc	= $activeParams->get('menu-meta_description');
+					$thisDesc = $activeParams->get('menu-meta_description');
 				}
 			}
 
-			$suffix 		= 'f';// Data from first article will be set
+			$suffix = 'f';// Data from first article will be set
 			$this->pluginNr = 1;
 		} else if ($view == 'category' && $this->pluginNr == 0) {
-			$suffix 		= 'c';// Data from first article will be set
+			$suffix = 'c';// Data from first article will be set
 
 
-			if (isset($row->catid) && (int)$row->catid > 0) {
+			if (isset($row->catid) && (int) $row->catid > 0) {
 				$db = Factory::getDBO();
 				$query = ' SELECT c.metadesc, c.metakey, c.params, c.title FROM #__categories AS c'
-			    .' WHERE c.id = '.(int) $row->catid . ' LIMIT 1';
+					. ' WHERE c.id = ' . (int) $row->catid . ' LIMIT 1';
 				$db->setQuery($query);
 				$cItem = $db->loadObjectList();
 
@@ -314,15 +338,15 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 				if (isset($cItem[0]->metadesc) && $cItem[0]->metadesc != '') {
 					//$row->metadesc 	= $cItem[0]->metadesc; We cannot influence global variable
-					$thisDesc		= $cItem[0]->metadesc;
+					$thisDesc = $cItem[0]->metadesc;
 				}
 				if (isset($cItem[0]->title) && $cItem[0]->title != '') {
 					//$row->title 	= $cItem[0]->title; We cannot influence global variable
-					$thisTitle		= $cItem[0]->title;
+					$thisTitle = $cItem[0]->title;
 				}
 				if (isset($cItem[0]->metakey) && $cItem[0]->metakey != '') {
 					//$row->title 	= $cItem[0]->title; We cannot influence global variable
-					$thisKey		= $cItem[0]->metakey;
+					$thisKey = $cItem[0]->metakey;
 				}
 			}
 
@@ -332,13 +356,13 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 			// 1 IF NOT 3 THEN CATEGORY TITLE
 			if ($title_type_category == 3 || $thisTitle == '') {
 				if (isset($document->title) && $document->title != '') {
-					$thisTitle	= $document->title;
+					$thisTitle = $document->title;
 				}
 			}
 
 			if ($desc_type_category == 3 || $thisDesc == '') {
 				if (!empty($activeParams->get('menu-meta_description')) && $activeParams->get('menu-meta_description') != '') {
-					$thisDesc	= $activeParams->get('menu-meta_description');
+					$thisDesc = $activeParams->get('menu-meta_description');
 				}
 			}
 
@@ -351,47 +375,47 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 			// 1 ARTICLE TITLE
 			if ($title_type == 3) {
 				if (isset($document->title) && $document->title != '') {
-					$thisTitle	= $document->title;
+					$thisTitle = $document->title;
 				} else {
 					// Fallback to standard title
 					if (isset($row->title)) {
-						$thisTitle	= $row->title;
+						$thisTitle = $row->title;
 					}
 				}
 			} else if ($title_type == 2) {
 				if (isset($attribs->article_page_title) && $attribs->article_page_title != '') {
-					$thisTitle	= $attribs->article_page_title;
+					$thisTitle = $attribs->article_page_title;
 				} else {
 					// Fallback to standard title
 					if (isset($row->title)) {
-						$thisTitle	= $row->title;
+						$thisTitle = $row->title;
 					}
 				}
 			} else {
 				if (isset($row->title)) {
-					$thisTitle	= $row->title;
+					$thisTitle = $row->title;
 				}
 			}
 
-			$suffix 		= '';
+			$suffix = '';
 
 			if (isset($row->metadesc)) {
-				$thisDesc 	= $row->metadesc;
+				$thisDesc = $row->metadesc;
 			}
 		}
 
 
 		// TITLE
-		if ($this->params->get('title'.$suffix, '') != '') {
-			$this->renderTag('og:title', $this->params->get('title'.$suffix, ''), $type);
-		} else if (isset($thisTitle) && (int)$thisTitle == -1) {
+		if ($this->params->get('title' . $suffix, '') != '') {
+			$this->renderTag('og:title', $this->params->get('title' . $suffix, ''), $type);
+		} else if (isset($thisTitle) && (int) $thisTitle == -1) {
 			// FORCE NOTHING - FEATURED VIEW
 		} else if (isset($thisTitle) && $thisTitle != '') {
 			$this->renderTag('og:title', $thisTitle, $type);
 		}
 
 		// Type
-		$this->renderTag('og:type', $this->params->get('type'.$suffix, 'article'), $type);
+		$this->renderTag('og:type', $this->params->get('type' . $suffix, 'article'), $type);
 
 		// Image
 		$pictures = '';
@@ -405,10 +429,10 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		$imgSet = 0;
 
 
-		if ($this->params->get('image'.$suffix, '') != '' && $parameterImage == 1) {
-			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($this->params->get('image'.$suffix, ''))), $type);
+		if ($this->params->get('image' . $suffix, '') != '' && $parameterImage == 1) {
+			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($this->params->get('image' . $suffix, ''))), $type);
 			$imgSet = 1;
-		} else if ($thisImg != ''){
+		} else if ($thisImg != '') {
 			$this->renderTag('og:image', $this->setImage($thisImg), $type);
 			$imgSet = 1;
 		} else if (isset($pictures->{'image_intro'}) && $pictures->{'image_intro'} != '') {
@@ -438,17 +462,17 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 			// Try to find image in images/phocaopengraph folder
 			if ($imgSet == 0) {
-				if (isset($row->id) && (int)$row->id > 0) {
+				if (isset($row->id) && (int) $row->id > 0) {
 
-					jimport( 'joomla.filesystem.file' );
-					$imgPath	= '';
-					$path 		= JPATH_ROOT . '/images/phocaopengraph/';
-					if (is_file($path . '/' . (int)$row->id.'.jpg')) {
-						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.jpg';
-					} else if (is_file($path . '/' . (int)$row->id.'.png')) {
-						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.png';
-					} else if (is_file($path . '/' . (int)$row->id.'.gif')) {
-						$imgPath = 'images/phocaopengraph/'.(int)$row->id.'.gif';
+					jimport('joomla.filesystem.file');
+					$imgPath = '';
+					$path = JPATH_ROOT . '/images/phocaopengraph/';
+					if (is_file($path . '/' . (int) $row->id . '.jpg')) {
+						$imgPath = 'images/phocaopengraph/' . (int) $row->id . '.jpg';
+					} else if (is_file($path . '/' . (int) $row->id . '.png')) {
+						$imgPath = 'images/phocaopengraph/' . (int) $row->id . '.png';
+					} else if (is_file($path . '/' . (int) $row->id . '.gif')) {
+						$imgPath = 'images/phocaopengraph/' . (int) $row->id . '.gif';
 					}
 
 					if ($imgPath != '') {
@@ -460,15 +484,15 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 		}
 
 		// If still image not set and parameter Image is set as last, then try to add the parameter image
-		if ($imgSet == 0 && $this->params->get('image'.$suffix, '') != '' && $parameterImage == 0) {
-			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($this->params->get('image'.$suffix, ''))), $type);
+		if ($imgSet == 0 && $this->params->get('image' . $suffix, '') != '' && $parameterImage == 0) {
+			$this->renderTag('og:image', $this->setImage($this->realCleanImageURL($this->params->get('image' . $suffix, ''))), $type);
 		}
 
 		// END IMAGE
 
 		//URL
-		if ($this->params->get('url'.$suffix, '') != '') {
-			$this->renderTag('og:url', $this->params->get('url'.$suffix, ''), $type);
+		if ($this->params->get('url' . $suffix, '') != '') {
+			$this->renderTag('og:url', $this->params->get('url' . $suffix, ''), $type);
 		} else {
 			//} else if ((int)$row->id > 0) {
 			//$url = ContentHelperRoute::getArticleRoute($row->id);
@@ -479,17 +503,17 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 
 		// Site Name
-		if ($this->params->get('site_name'.$suffix, '') != '') {
-			$this->renderTag('og:site_name', $this->params->get('site_name'.$suffix, ''), $type);
+		if ($this->params->get('site_name' . $suffix, '') != '') {
+			$this->renderTag('og:site_name', $this->params->get('site_name' . $suffix, ''), $type);
 		} else if ($thisTitle != '') {
 			$this->renderTag('og:site_name', $config->get('sitename'), $type);
 		}
 
 
 		// Description - works for article only (category and featured includes $thisDesc by conditions set previously)
-		if ($this->params->get('description'.$suffix, '') != '') { // description in params
-			$this->renderTag('og:description', $this->params->get('description'.$suffix, ''), $type);
-		} else if (isset($thisDesc) && (int)$thisDesc == -1) {
+		if ($this->params->get('description' . $suffix, '') != '') { // description in params
+			$this->renderTag('og:description', $this->params->get('description' . $suffix, ''), $type);
+		} else if (isset($thisDesc) && (int) $thisDesc == -1) {
 			// FORCE NOTHING - FEATURED VIEW
 		} else if (isset($thisDesc) && $thisDesc != '') { // article meta description
 			$this->renderTag('og:description', $thisDesc, $type);
@@ -508,18 +532,18 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 			$iTD = str_replace("\n", ' ', $iTD);
 
 			// Remove every possible plugin code
-			$iTD = preg_replace("/\{[^}]+\}/","",$iTD);
-			$iTD = preg_replace("/\[[^]]+\]/","",$iTD);
-			$iTD = preg_replace("/\([^)]+\)/","",$iTD);
+			$iTD = preg_replace("/\{[^}]+\}/", "", $iTD);
+			$iTD = preg_replace("/\[[^]]+\]/", "", $iTD);
+			$iTD = preg_replace("/\([^)]+\)/", "", $iTD);
 
 			if ($rSD != '') {
-			$rSDA =  explode(',', $rSD);
-			if (!empty($rSDA)) {
-				foreach ($rSDA as $k => $v) {
-					$iTD = str_replace($v, "", $iTD);
+				$rSDA = explode(',', $rSD);
+				if (!empty($rSDA)) {
+					foreach ($rSDA as $k => $v) {
+						$iTD = str_replace($v, "", $iTD);
+					}
 				}
 			}
-		}
 
 			$this->renderTag('og:description', $iTD, $type);
 		} else if ($config->get('MetaDesc') != '') { // site meta desc
@@ -543,12 +567,12 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 
 		// Other
 		if ($this->params->get('other', '') != '') {
-			$other = explode (';', $this->params->get('other', ''));
+			$other = explode(';', $this->params->get('other', ''));
 			if (!empty($other)) {
 				foreach ($other as $v) {
 					if ($v != '') {
-						$vother = explode ('=', $v);
-						if(!empty($vother)) {
+						$vother = explode('=', $v);
+						if (!empty($vother)) {
 							if (isset($vother[0]) && isset($vother[1])) {
 								$this->renderTag(strip_tags($vother[0]), $vother[1], $type);
 							}
@@ -565,12 +589,13 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 	 * Extra features
 	 */
 
-	public function onContentBeforeDisplay($context, &$row, &$params, $page=0) {
+	public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
+	{
 
 
 		$article_display_category_image = $this->params->get('article_display_category_image', 0);
 
-		if ((int)$article_display_category_image > 0) {
+		if ((int) $article_display_category_image > 0) {
 
 
 			$app = Factory::getApplication();
@@ -579,10 +604,10 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 				$categoryImage = '';
 				$categoryImageAlt = '';
 
-				if (isset($row->catid) && (int)$row->catid > 0) {
-					$db = Factory::getDBO();
+				if (isset($row->catid) && (int) $row->catid > 0) {
+					$db = Factory::getContainer()->get(\Joomla\Database\DatabaseInterface::class);
 					$query = ' SELECT c.params FROM #__categories AS c'
-						. ' WHERE c.id = ' . (int)$row->catid . ' LIMIT 1';
+						. ' WHERE c.id = ' . (int) $row->catid . ' LIMIT 1';
 					$db->setQuery($query);
 					$cItem = $db->loadObjectList();
 
@@ -605,14 +630,15 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 				$images = new stdClass();
 
 				if (isset($row->images)) {
-					$images = json_decode($row->images);
+					//$images = json_decode($row->images);
+					$images = (is_string($row->images) ? json_decode($row->images) : $row->images);
 				}
 
 				if (!is_object($images)) {
 					$images = new stdClass();
 				}
 
-				if ((int)$article_display_category_image == 1 || (int)$article_display_category_image == 3) {
+				if ((int) $article_display_category_image == 1 || (int) $article_display_category_image == 3) {
 
 					if ((!isset($images->image_fulltext) || (isset($images->image_fulltext) && $images->image_fulltext == '')) && $categoryImage != '') {
 						$images->image_fulltext = $categoryImage;
@@ -622,10 +648,10 @@ class plgContentPhocaOpenGraph extends CMSPlugin
 					}
 				}
 
-				if ((int)$article_display_category_image == 2 || (int)$article_display_category_image == 3) {
+				if ((int) $article_display_category_image == 2 || (int) $article_display_category_image == 3) {
 					if ((!isset($images->image_intro) || (isset($images->image_intro) && $images->image_intro == '')) && $categoryImage != '') {
-						$images->image_intro 		= $categoryImage;
-						$images->image_intro_alt 	= $categoryImageAlt;
+						$images->image_intro = $categoryImage;
+						$images->image_intro_alt = $categoryImageAlt;
 
 						$row->images = json_encode($images);
 					}

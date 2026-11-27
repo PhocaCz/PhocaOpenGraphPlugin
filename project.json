@@ -9,8 +9,10 @@
 	"description": "Phoca Open Graph Content Plugin is a Joomla! CMS Plugin. It adds open graph information meta tags into website html source code. Such information stored in meta tags can be automatically displayed on social media websites.",
 	"projectUrl": "https://www.phoca.cz/phoca-open-graph-plugin",
 	"projectDocumentationUrl": "https://www.phoca.cz/documentation/category/70-phoca-open-graph-plugin",
+	"projectDownloadInfo": "https://www.phoca.cz/download/78-phoca-plugins/62-phoca-open-graph-plugin",
 	"projectDemo" : {
 		"Demo": "https://www.phoca.cz/news/"
 	},
-	"projectColor": "#895ED1"
+	"projectColor": "#895ED1",
+	"projectBranch": "master"
 }
